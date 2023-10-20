@@ -1,23 +1,23 @@
 import React from "react";
 import {
-  Button,
   Box,
   AppBar,
   Toolbar,
   Typography,
   Container,
-  Tabs,
-  Tab
+  IconButton,
 } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import Home from "../pages/Home";
-import About from "../pages/About";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Container maxWidth="xl">
         <Toolbar>
           {/* Code for the Title and Logo */}
@@ -25,8 +25,9 @@ const Navbar = () => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/"
+            value="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -39,7 +40,8 @@ const Navbar = () => {
           >
             MUSIC THEORY TUTOR
           </Typography>
-
+          
+          {/* Declares a box which holds all the icons appearing in the top right */}
           <Box
             sx={{
               flexGrow: 1,
@@ -47,23 +49,24 @@ const Navbar = () => {
               justifyContent: "flex-end",
             }}
           >
-            <Tabs
-              aria-label="Navigation Tabs"
-              indicatorColor="secondary"
-              textColor="inherit"
+
+            {/* Code for each individual button. Listed below for profile and settings */}
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/profile"
+              value="/profile"
             >
-              <Tab 
-                label={"Home"}
-                component={Link}
-                to="/"
-                value="/" />
-              <Tab
-                label={"About"}
-                component={Link}
-                to="/about"
-                value="/about"
-              />
-            </Tabs>
+              <AccountCircleIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/settings"
+              value="/settings"
+            >
+              <SettingsIcon />
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>
@@ -72,6 +75,6 @@ const Navbar = () => {
 };
 export default Navbar;
 
-//ref 
+//ref
 // https://javascript.works-hub.com/learn/how-to-create-a-responsive-navbar-using-material-ui-and-react-router-f9a01
 // https://github.com/marmelab/react-admin/blob/master/examples/crm/src/Header.tsx
