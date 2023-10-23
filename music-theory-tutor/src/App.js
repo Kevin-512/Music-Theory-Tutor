@@ -5,7 +5,7 @@ import Sidebar from "./component/Sidebar";
 import { Toolbar } from "@mui/material";
 import Learn from "./pages/Learn";
 import Sightreading from "./pages/Sightreading";
-import Quiz from "./pages/Quiz";
+import QuizNav from "./pages/QuizNav";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 
@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/sightreading" element={<Sightreading />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz" element={<QuizNav />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

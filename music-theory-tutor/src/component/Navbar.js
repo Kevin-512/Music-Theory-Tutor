@@ -9,14 +9,15 @@ import {
 } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <AppBar
       position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      // Colour to place in sx in line below bgcolor: "#993ac5",
+      sx={{  zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
       <Container maxWidth="xl">
         <Toolbar>
@@ -40,7 +41,7 @@ const Navbar = () => {
           >
             MUSIC THEORY TUTOR
           </Typography>
-          
+
           {/* Declares a box which holds all the icons appearing in the top right */}
           <Box
             sx={{
@@ -49,7 +50,6 @@ const Navbar = () => {
               justifyContent: "flex-end",
             }}
           >
-
             {/* Code for each individual button. Listed below for profile and settings */}
             <IconButton
               color="inherit"
