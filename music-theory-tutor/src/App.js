@@ -8,6 +8,7 @@ import Sightreading from "./pages/Sightreading";
 import QuizNav from "./pages/QuizNav";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import Quiz from "./pages/Quiz";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/sightreading" element={<Sightreading />} />
-          <Route path="/quiz" element={<QuizNav />} />
+          <Route path="/quizmap" element={<QuizNav />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Routes>
       </div>
     </Router>

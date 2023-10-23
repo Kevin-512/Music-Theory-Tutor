@@ -46,7 +46,7 @@ const Sidebar = () => {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/quiz" value="/quiz">
+              <ListItemButton component={Link} to="/quizmap" value="/quizmap">
                 <ListItemIcon><QuizIcon/></ListItemIcon>
                 <ListItemText primary="Quizzes" />
               </ListItemButton>
