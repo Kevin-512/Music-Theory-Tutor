@@ -25,17 +25,13 @@ const QuizNav = () => {
           noteRange={{ first: firstNote, last: lastNote }}
           playNote={(midiNumber) => {
             var ac = new AudioContext();
-            Soundfont.instrument(
-              ac,
-              "acoustic_grand_piano"
-            ).then((piano) => {
-              piano.play(midiNumber, ac.currentTime, { duration: 0.7});
+            Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
+              piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
             });
-            
           }}
           stopNote={(midiNumber) => {
-            // Navigation to quizzes by passing the key number/midiNumber 
-              navigate("/quiz", { state: { id:midiNumber } });
+            // Navigation to quizzes by passing the key number/midiNumber
+            navigate("/quiz", { state: { id: midiNumber } });
           }}
           width={1000}
           // Can use this property to change the width of the key: keyWidthToHeight={0.5}
