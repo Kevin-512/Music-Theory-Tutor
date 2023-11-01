@@ -1,5 +1,11 @@
 // Ref https://codevertiser.com/quiz-app-using-reactjs/
-import { Container, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Button,
+  Container,
+  ToggleButton,
+  ToggleButtonGroup,
+  Toolbar,
+} from "@mui/material";
 import React, { useState } from "react";
 
 const QuizCard = () => {
@@ -32,30 +38,35 @@ const QuizCard = () => {
     ],
   };
 
-  const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
-  const [result, setResult] = useState({
-    score: 0,
-    correctAnswers: 0,
-    wrongAnswers: 0,
-  });
-
+  // Called when the next button is pressed
   const onClickNext = () => {
-    setActiveQuestion((prev) => prev + 1);
+    // Checks that an answer has been selected, if it hasn't then nothing happens. Otherwise moves to next question
     setResult((prev) =>
       selectedAnswer
         ? {
             ...prev,
-            score: prev.score + 5,
+            score: prev.score + 1,
             correctAnswers: prev.correctAnswers + 1,
           }
         : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
     );
+    
+    if (selectedAnswerIndex != null) {
+      if (activeQuestion !== questions.length - 1) {
+        setActiveQuestion((prev) => prev + 1);
+        setSelectedAnswerIndex(null);
+      } else {
+        setActiveQuestion(0);
+        setResult({ score: 0, correctAnswers: 0, wrongAnswers: 0 });
+        console.log("Finished");
+      }
+    }
   };
 
+  // Stores whether the selected answer is the correct one or not
   const onAnswerSelected = (answer, index) => {
     setSelectedAnswerIndex(index);
+    console.log(index);
     if (answer === questions[activeQuestion].correctAnswer) {
       setSelectedAnswer(true);
       console.log("right");
@@ -65,19 +76,27 @@ const QuizCard = () => {
     }
   };
 
-  const { questions } = quiz;
-  const { question, choices } = questions[activeQuestion];
-  const [view, setView] = React.useState("list");
-
+  // Refreshes the appearance of the multiple choice question
   const handleChange = (event, nextView) => {
     setView(nextView);
   };
 
+  const [activeQuestion, setActiveQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [result, setResult] = useState({
+    score: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
+  });
+  const { questions } = quiz;
+  const { question, choices } = questions[activeQuestion];
+  const [view, setView] = React.useState("list");
+
   return (
-    <Container>
-      <h1>QuizCard</h1>
+    <Container maxWidth="md">
       <h2>{question}</h2>
-      <ToggleButtonGroup 
+      <ToggleButtonGroup
         fullWidth
         orientation="vertical"
         value={view}
@@ -88,14 +107,30 @@ const QuizCard = () => {
           <ToggleButton
             value={index}
             key={answer}
-            // onClick={() => onAnswerSelected(answer, index)}
+            onClick={() => onAnswerSelected(answer, index)}
             // className={selectedAnswerIndex === index ? "selected-answer" : null}
           >
             {answer}
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
-      <button onClick={onClickNext}>Next</button>
+      <Toolbar />
+      <Container style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          style={{ textAlign: "right" }}
+          variant="contained"
+          onClick={() => {
+            onClickNext();
+            handleChange();
+          }}
+        >
+          Next
+        </Button>
+      </Container>
+
+      <h3>{"Score:" + result.score}</h3>
+      <h3>{"Correct:" + result.correctAnswers}</h3>
+      <h3>{"Wrong:" + result.wrongAnswers}</h3>
     </Container>
   );
 };
