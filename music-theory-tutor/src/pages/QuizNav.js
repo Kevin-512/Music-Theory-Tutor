@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +9,48 @@ const QuizNav = () => {
 
   const firstNote = MidiNumbers.fromNote("c5");
   const lastNote = MidiNumbers.fromNote("c6");
+  // const keyboardShortcuts = KeyboardShortcuts.create({
+  //   firstNote: firstNote,
+  //   lastNote: lastNote,
+  //   keyboardConfig: KeyboardShortcuts.HOME_ROW,
+  // });
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
-    keyboardConfig: KeyboardShortcuts.HOME_ROW,
+    keyboardConfig: [
+      {
+        natural: "Level 1",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 2",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 3",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 4",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 5",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 6",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 7",
+        flat: "Placeholder",
+      },
+      {
+        natural: "Level 8",
+        flat: "Placeholder",
+      },
+    ],
   });
 
   return (
