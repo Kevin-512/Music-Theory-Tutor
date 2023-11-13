@@ -7,40 +7,15 @@ import {
   Toolbar,
 } from "@mui/material";
 import React, { useState } from "react";
+import quaver from "../images/treble_clef_notes/treble_A2.png";
+import { quiz } from "../constant/quizData";
+import StaveBuilder from "../display/StaveBuilder";
 
 const QuizCard = () => {
-  const quiz = {
-    topic: "Javascript",
-    level: "Beginner",
-    totalQuestions: 4,
-    perQuestionScore: 5,
-    questions: [
-      {
-        question:
-          "Which function is used to serialize an object into a JSON string in Javascript?",
-        choices: ["stringify()", "parse()", "convert()", "None of the above"],
-        type: "MCQs",
-        correctAnswer: "stringify()",
-      },
-      {
-        question:
-          "Which of the following keywords is used to define a variable in Javascript?",
-        choices: ["var", "let", "var and let", "None of the above"],
-        type: "MCQs",
-        correctAnswer: "var and let",
-      },
-      {
-        question: "How can a datatype be declared to be a constant type?",
-        choices: ["const", "var", "let", "constant"],
-        type: "MCQs",
-        correctAnswer: "const",
-      },
-    ],
-  };
-
   // Called when the next button is pressed
   const onClickNext = () => {
     // Checks that an answer has been selected, if it hasn't then nothing happens. Otherwise moves to next question
+    // Code below has been reused from reference
     setResult((prev) =>
       selectedAnswer
         ? {
@@ -50,7 +25,7 @@ const QuizCard = () => {
           }
         : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
     );
-    
+
     if (selectedAnswerIndex != null) {
       if (activeQuestion !== questions.length - 1) {
         setActiveQuestion((prev) => prev + 1);
@@ -94,8 +69,16 @@ const QuizCard = () => {
   const [view, setView] = React.useState("list");
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <h2>{question}</h2>
+      <Container maxWidth="md" style={{ textAlign: "center" }}>
+        {/* <img src={quaver} alt="Quaver" width="250"/> */}
+        <StaveBuilder
+          clef={questions[activeQuestion].clef}
+          timeSig={questions[activeQuestion].timeSig}
+          notes={questions[activeQuestion].notes}
+        />
+      </Container>
       <ToggleButtonGroup
         fullWidth
         orientation="vertical"
@@ -115,6 +98,7 @@ const QuizCard = () => {
         ))}
       </ToggleButtonGroup>
       <Toolbar />
+      {/* Code for question navigation button */}
       <Container style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           style={{ textAlign: "right" }}
