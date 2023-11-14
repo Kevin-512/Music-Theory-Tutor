@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Vex from "vexflow";
 
-const StaveBuilder = ({ clef = "bass", timeSig = "4/4", notes = "", keySig="A"}) => {
+const StaveBuilder = ({ clef = "bass", timeSig = "2/4", notes = "", keySig="A"}) => {
   const { Factory } = Vex.Flow;
   const outputRef = useRef(null);
 
@@ -10,7 +10,7 @@ const StaveBuilder = ({ clef = "bass", timeSig = "4/4", notes = "", keySig="A"})
       outputRef.current.innerHTML = "";
 
       const vf = new Factory({
-        renderer: { elementId: outputRef.current, width: 500, height: 200 },
+        renderer: { elementId: outputRef.current, width: 250, height: 200 },
       });
 
       const score = vf.EasyScore();
@@ -19,7 +19,7 @@ const StaveBuilder = ({ clef = "bass", timeSig = "4/4", notes = "", keySig="A"})
       system
         .addStave({
           voices: [
-            score.voice(score.notes(notes)),
+            score.voice(score.notes(notes)).setStrict(false),
           ],
         })
         .addClef(clef)

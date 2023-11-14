@@ -6,8 +6,8 @@ export const quiz = {
         choices: ["Bass", "Treble"],
         correctAnswer: "Bass",
         clef: "bass",
-        timeSig: "1/1",
-        notes: "",
+        // timeSig: "4/4",
+        notes: "A5",
       },
       {
         question:
@@ -15,8 +15,8 @@ export const quiz = {
         choices: ["A", "G", "C", "E#"],
         correctAnswer: "A",
         clef: "treble",
-        timeSig: "1/1",
-        notes: "A5",
+        // timeSig: "4/4",
+        notes: "A4",
       },
       {
         question:
@@ -24,7 +24,7 @@ export const quiz = {
         choices: ["B", "D", "C", "E#"],
         correctAnswer: "A",
         clef: "treble",
-        timeSig: "1/1",
+        timeSig: "4/4",
         notes: "B5",
       },
     ],
