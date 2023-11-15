@@ -5,9 +5,9 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   Toolbar,
+  Grid,
 } from "@mui/material";
 import React, { useState } from "react";
-import quaver from "../images/treble_clef_notes/treble_A2.png";
 import { quiz } from "../constant/quizData";
 import StaveBuilder from "../display/StaveBuilder";
 
@@ -16,26 +16,54 @@ const QuizCard = () => {
   const onClickNext = () => {
     // Checks that an answer has been selected, if it hasn't then nothing happens. Otherwise moves to next question
     // Code below has been reused from reference
-    setResult((prev) =>
-      selectedAnswer
-        ? {
-            ...prev,
-            score: prev.score + 1,
-            correctAnswers: prev.correctAnswers + 1,
-          }
-        : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
-    );
 
     if (selectedAnswerIndex != null) {
       if (activeQuestion !== questions.length - 1) {
         setActiveQuestion((prev) => prev + 1);
         setSelectedAnswerIndex(null);
+        setResult((prev) =>
+          selectedAnswer
+            ? {
+                ...prev,
+                score: prev.score + 1,
+                correctAnswers: prev.correctAnswers + 1,
+              }
+            : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
+        );
       } else {
-        setActiveQuestion(0);
+        // setActiveQuestion(0);
         setResult({ score: 0, correctAnswers: 0, wrongAnswers: 0 });
         console.log("Finished");
+        toggleVisibility();
       }
     }
+  };
+
+  const onClickPrev = () => {
+    // Checks that an answer has been selected, if it hasn't then nothing happens. Otherwise moves to next question
+    // Code below has been reused from reference
+      if (activeQuestion !== 0) {
+        setActiveQuestion((prev) => prev - 1);
+        setSelectedAnswerIndex(null);
+        // setResult((prev) =>
+        //   selectedAnswer
+        //     ? {
+        //         ...prev,
+        //         score: prev.score + 1,
+        //         correctAnswers: prev.correctAnswers + 1,
+        //       }
+        //     : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
+        // );
+      }
+  };
+
+  const onClickSubmit = () => {
+    
+  }
+
+  const toggleVisibility = () => {
+    setIsNextVisible(!isNextVisible);
+    console.log("RUNS");
   };
 
   // Stores whether the selected answer is the correct one or not
@@ -59,6 +87,7 @@ const QuizCard = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [isNextVisible, setIsNextVisible] = useState(true);
   const [result, setResult] = useState({
     score: 0,
     correctAnswers: 0,
@@ -71,6 +100,8 @@ const QuizCard = () => {
   return (
     <Container maxWidth="lg">
       <h2>{question}</h2>
+
+      {/* Display the stave for the question */}
       <Container maxWidth="md" style={{ textAlign: "center" }}>
         {/* <img src={quaver} alt="Quaver" width="250"/> */}
         <StaveBuilder
@@ -79,6 +110,8 @@ const QuizCard = () => {
           notes={questions[activeQuestion].notes}
         />
       </Container>
+
+      {/* Display the list of possible answers to the question */}
       <ToggleButtonGroup
         fullWidth
         orientation="vertical"
@@ -97,19 +130,50 @@ const QuizCard = () => {
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
+      {/* Toolbar creates whitespace */}
       <Toolbar />
+
       {/* Code for question navigation button */}
-      <Container style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          style={{ textAlign: "right" }}
-          variant="contained"
-          onClick={() => {
-            onClickNext();
-            handleChange();
-          }}
-        >
-          Next
-        </Button>
+      <Container style={{ display: "flex" }}>
+        <Grid container spacing={38} justify="space-between">
+          <Grid item>
+            <Button
+              style={{ textAlign: "center", justifyContent: "right" }}
+              variant="contained"
+              onClick={() => {
+                onClickPrev();
+                handleChange();
+              }}
+            >
+              Previous
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              style={{ textAlign: "center", justifyContent: "right" }}
+              variant="contained"
+              onClick={() => {
+                console.log("Submitting");
+              }}
+            >
+              Submit
+            </Button>
+          </Grid>
+          <Grid item>
+            {isNextVisible && (
+              <Button
+                style={{ textAlign: "center" }}
+                variant="contained"
+                onClick={() => {
+                  onClickNext();
+                  handleChange();
+                }}
+              >
+                Next
+              </Button>
+            )}
+          </Grid>
+        </Grid>
       </Container>
 
       <h3>{"Score:" + result.score}</h3>
