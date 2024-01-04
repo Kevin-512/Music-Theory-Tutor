@@ -3,8 +3,10 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import { useNavigate } from "react-router-dom";
 import Soundfont from "soundfont-player";
+import { ToggleButtonGroup, ToggleButton, Toolbar } from "@mui/material";
 
 const QuizNav = () => {
+  const [alignment, setAlignment] = React.useState("minor");
   const navigate = useNavigate();
 
   const firstNote = MidiNumbers.fromNote("c5");
@@ -19,39 +21,43 @@ const QuizNav = () => {
     lastNote: lastNote,
     keyboardConfig: [
       {
-        natural: "Level 1",
-        flat: "Placeholder",
+        natural: "C",
+        flat: "Cb",
       },
       {
-        natural: "Level 2",
-        flat: "Placeholder",
+        natural: "D",
+        flat: "Db",
       },
       {
-        natural: "Level 3",
-        flat: "Placeholder",
+        natural: "E",
+        flat: "Eb",
       },
       {
-        natural: "Level 4",
-        flat: "Placeholder",
+        natural: "F",
+        flat: "Fb",
       },
       {
-        natural: "Level 5",
-        flat: "Placeholder",
+        natural: "G",
+        flat: "Gb",
       },
       {
-        natural: "Level 6",
-        flat: "Placeholder",
+        natural: "A",
+        flat: "Ab",
       },
       {
-        natural: "Level 7",
-        flat: "Placeholder",
+        natural: "B",
+        flat: "Bb",
       },
       {
-        natural: "Level 8",
-        flat: "Placeholder",
+        natural: "All Scales",
+        flat: "All Scales",
       },
     ],
   });
+
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   return (
     <div>
@@ -69,12 +75,27 @@ const QuizNav = () => {
           }}
           stopNote={(midiNumber) => {
             // Navigation to quizzes by passing the key number/midiNumber
-            navigate("/quiz", { state: { id: midiNumber } });
+            navigate("/quiz", { state: { id: midiNumber, scale: alignment } });
           }}
           width={1000}
           // Can use this property to change the width of the key: keyWidthToHeight={0.5}
           keyboardShortcuts={keyboardShortcuts}
         />
+
+        <Toolbar/>
+
+        <ToggleButtonGroup
+          color="primary"
+          value={alignment}
+          exclusive
+          onChange={handleChange}
+        >
+          <ToggleButton value="minor">Minor</ToggleButton>
+          <ToggleButton value="major">Major</ToggleButton>
+        </ToggleButtonGroup>
+      </div>
+      <div>
+        
       </div>
     </div>
   );
