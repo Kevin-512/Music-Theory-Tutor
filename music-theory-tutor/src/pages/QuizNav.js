@@ -6,16 +6,11 @@ import Soundfont from "soundfont-player";
 import { ToggleButtonGroup, ToggleButton, Toolbar } from "@mui/material";
 
 const QuizNav = () => {
-  const [alignment, setAlignment] = React.useState("minor");
+  const [alignment, setAlignment] = React.useState("major");
   const navigate = useNavigate();
 
   const firstNote = MidiNumbers.fromNote("c5");
   const lastNote = MidiNumbers.fromNote("c6");
-  // const keyboardShortcuts = KeyboardShortcuts.create({
-  //   firstNote: firstNote,
-  //   lastNote: lastNote,
-  //   keyboardConfig: KeyboardShortcuts.HOME_ROW,
-  // });
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
@@ -56,7 +51,9 @@ const QuizNav = () => {
   });
 
   const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
   return (
@@ -82,21 +79,14 @@ const QuizNav = () => {
           keyboardShortcuts={keyboardShortcuts}
         />
 
-        <Toolbar/>
+        <Toolbar />
 
-        <ToggleButtonGroup
-          color="primary"
-          value={alignment}
-          exclusive
-          onChange={handleChange}
-        >
-          <ToggleButton value="minor">Minor</ToggleButton>
+        <ToggleButtonGroup value={alignment} exclusive onChange={handleChange}>
           <ToggleButton value="major">Major</ToggleButton>
+          <ToggleButton value="minor">Minor</ToggleButton>
         </ToggleButtonGroup>
       </div>
-      <div>
-        
-      </div>
+      <div></div>
     </div>
   );
 };

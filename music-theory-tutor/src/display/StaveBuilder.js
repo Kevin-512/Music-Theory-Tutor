@@ -10,7 +10,7 @@ const StaveBuilder = ({ clef = "bass", timeSig = "2/4", notes = "", keySig="A"})
       outputRef.current.innerHTML = "";
 
       const vf = new Factory({
-        renderer: { elementId: outputRef.current, width: 250, height: 200 },
+        renderer: { elementId: outputRef.current, width: 400, height: 200 },
       });
 
       const score = vf.EasyScore();

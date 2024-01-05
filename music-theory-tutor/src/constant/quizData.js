@@ -1,31 +1,138 @@
 export const quiz = {
-    questions: [
-      {
-        question:
-          "Identify the clef?",
-        choices: ["Bass", "Treble"],
-        correctAnswer: "Bass",
-        clef: "bass",
-        // timeSig: "4/4",
-        notes: "A5",
-      },
-      {
-        question:
-          "Identify the note?",
-        choices: ["A", "G", "C", "E#"],
-        correctAnswer: "A",
-        clef: "treble",
-        // timeSig: "4/4",
-        notes: "A4",
-      },
-      {
-        question:
-          "Identify the note?",
-        choices: ["B", "D", "C", "E#"],
-        correctAnswer: "A",
-        clef: "treble",
-        timeSig: "4/4",
-        notes: "B5",
-      },
-    ],
-  };
+  questions: [
+    {
+      question: "Identify the clef?",
+      choices: ["Bass", "Treble"],
+      correctAnswer: "Bass",
+      clef: "bass",
+      // timeSig: "4/4",
+      notes: "A5",
+      selectedAnswer: "",
+    },
+    {
+      question: "Identify the note?",
+      choices: ["A", "G", "C", "E#"],
+      correctAnswer: "A",
+      clef: "treble",
+      // timeSig: "4/4",
+      notes: "A4",
+      selectedAnswer: "",
+    },
+    {
+      question: "Identify the note?",
+      choices: ["B", "D", "C", "E#"],
+      correctAnswer: "A",
+      clef: "treble",
+      timeSig: "4/4",
+      notes: "B5",
+      selectedAnswer: "",
+    },
+  ],
+};
+
+export const majQuiz72 = {
+  questions: [
+    {
+      question: "Which note is the tonic (root) in the C Major scale?",
+      choices: ["A", "C", "E", "G"],
+      correctAnswer: "E",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "In the C Major scale, what is the second-degree note?",
+      choices: ["D", "F", "C", "A"],
+      correctAnswer: "E",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "What is the relative minor key of C Major?",
+      choices: ["E Minor", "C Minor", "A Minor", "G Minor"],
+      correctAnswer: "A Minor",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "Which note is raised by a half step in C Major?",
+      choices: [
+        "Between C and D",
+        "Between F and G",
+        "Between B and C",
+        "Between A and B",
+      ],
+      correctAnswer: "Between B and C",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question:
+        "How many sharps are in the C Major key signature of the treble clef?",
+      choices: ["None", "One", "Two", "Three"],
+      correctAnswer: "None",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "What is the subdominant chord in C Major?",
+      choices: ["A Major", "E Minor", "F Minor", "F Major"],
+      correctAnswer: "F Major",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "What's the leading tone in the C Major scale?",
+      choices: ["D", "C", "F", "B"],
+      correctAnswer: "B",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "Which note is the mediant in the C Major scale?",
+      choices: ["A", "E", "Bb", "G#"],
+      correctAnswer: "E",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question:
+        "What interval is formed between the first and fifth degrees of the C Major?",
+      choices: [
+        "Perfect Fifth",
+        "Perfect Fourth",
+        "Minor Sixth",
+        "Major Fourth",
+      ],
+      correctAnswer: "Perfect Fifth",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+    {
+      question: "What is the key signature of C Major?",
+      choices: ["Three Sharps", "Two Flats", "No sharps or flats", "One Flat"],
+      correctAnswer: "No sharps or flats",
+      // clef: "bass",
+      // timeSig: "4/4",
+      notes: "C4, D4, E4, F4, G4, A4, B4, C5",
+      selectedAnswer: "",
+    },
+  ],
+};
