@@ -21,11 +21,11 @@ const QuizNav = () => {
       },
       {
         natural: "D",
-        flat: "Db",
+        flat: "C#",
       },
       {
         natural: "E",
-        flat: "Eb",
+        flat: "D#",
       },
       {
         natural: "F",
@@ -33,15 +33,15 @@ const QuizNav = () => {
       },
       {
         natural: "G",
-        flat: "Gb",
+        flat: "F#",
       },
       {
         natural: "A",
-        flat: "Ab",
+        flat: "G#",
       },
       {
         natural: "B",
-        flat: "Bb",
+        flat: "A#",
       },
       {
         natural: "All Scales",

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Vex from "vexflow";
 
-const StaveBuilder = ({ clef = "bass", timeSig = "2/4", notes = "", keySig="A"}) => {
+const StaveBuilder = ({ clef = "treble", timeSig = "4/4", notes = "", keySig=""}) => {
   const { Factory } = Vex.Flow;
   const outputRef = useRef(null);
 

@@ -8,14 +8,14 @@ import {
   Grid,
 } from "@mui/material";
 import React, { useState } from "react";
-import { majQuiz72 as quiz } from "../constant/quizData";
+import * as allQuizzes from "../constant/quizData";
 import StaveBuilder from "../display/StaveBuilder";
 import { useNavigate } from "react-router-dom";
 
-const QuizCard = () => {
+const QuizCard = (props) => {
   // Called when the next button is pressed
 
-  const onClickSubmit = () => {
+  const onClickSubmit = (props) => {
     if (selectedAnswerIndex != null) {
       setQuestionSubmitted(true);
       setResult((prev) =>
@@ -78,7 +78,9 @@ const QuizCard = () => {
     correctAnswers: 0,
     wrongAnswers: 0,
   });
-  const { questions } = quiz;
+  const { quizId, quizScale } = props;
+  const { questions } = allQuizzes[quizScale + quizId];
+
   const { question, choices } = questions[activeQuestion];
   const [viewMCQ, setViewMCQ] = React.useState("list");
   const navigate = useNavigate();
@@ -91,11 +93,11 @@ const QuizCard = () => {
             (result.correctAnswers + result.wrongAnswers === 0
               ? "N/A"
               : (
-                  result.correctAnswers /
-                  (result.correctAnswers + result.wrongAnswers)
-                ).toFixed(2) *
-                  100 +
-                "%")}
+                  Number(
+                    result.correctAnswers /
+                      (result.correctAnswers + result.wrongAnswers)
+                  ).toFixed(4) * 100
+                ).toFixed(2) + "%")}
         </span>
         <span>{"Correct: " + result.correctAnswers}</span>
         <span style={{ marginRight: "100px" }}>
@@ -113,6 +115,7 @@ const QuizCard = () => {
             clef={questions[activeQuestion].clef}
             timeSig={questions[activeQuestion].timeSig}
             notes={questions[activeQuestion].notes}
+            keySig={questions[activeQuestion].keySig}
           />
 
           {/* Display the list of possible answers to the question */}
