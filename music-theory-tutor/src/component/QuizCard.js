@@ -79,7 +79,15 @@ const QuizCard = (props) => {
     wrongAnswers: 0,
   });
   const { quizId, quizScale } = props;
-  const { questions } = allQuizzes[quizScale + quizId];
+  const { quizName } = { quizName: quizScale + quizId };
+
+  // This code sets the quiz to be C Major if it doesnt yet exist for the purpose of testing and preventing errors
+  let questions;
+  if (!(quizName in allQuizzes)) {
+    questions = allQuizzes.maj72.questions;
+  } else {
+    questions = allQuizzes[quizName].questions;
+  }
 
   const { question, choices } = questions[activeQuestion];
   const [viewMCQ, setViewMCQ] = React.useState("list");
@@ -87,6 +95,7 @@ const QuizCard = (props) => {
 
   return (
     <div>
+      <h1>{quizName}</h1>
       <h2 style={{ display: "flex", justifyContent: "space-between" }}>
         <span style={{ marginLeft: "100px" }}>
           {"Score: " +
