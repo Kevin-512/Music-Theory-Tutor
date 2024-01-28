@@ -7,8 +7,15 @@ import Soundfont from "soundfont-player";
 import { Vex } from "vexflow";
 
 const SightreadingPane = () => {
+  const firstNote = MidiNumbers.fromNote("c5");
+  const lastNote = MidiNumbers.fromNote("b5");
   const { state } = useLocation();
   const { id, scale } = state;
+  const [result, setResult] = useState({
+    score: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
+  });
 
   function midiToNote(midiNumber, addOctave) {
     const notes = [
@@ -33,13 +40,6 @@ const SightreadingPane = () => {
       return notes[noteIndex - 1];
     }
   }
-  let scaleNotes = Scale.get(midiToNote(id, false) + " " + scale).notes;
-  let scaleName =
-    midiToNote(id) + " " + scale.charAt(0).toUpperCase() + scale.slice(1);
-  
-
-  const firstNote = MidiNumbers.fromNote("c5");
-  const lastNote = MidiNumbers.fromNote("b5");
 
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
@@ -103,50 +103,80 @@ const SightreadingPane = () => {
       "a#": "C#",
     };
 
-    if (mode === "major") {
+    if (mode === "major" && note in majorSignatures) {
       return majorSignatures[note];
-    } else if (mode === "minor") {
+    } else if (mode === "minor" && note in minorSignatures) {
       return minorSignatures[note];
     } else {
-      return null;
+      return "C";
     }
   }
 
-  function generateNoteSet(numberOfNotes) {
+  function generateNoteSet(numberOfNotes = 8) {
     // Generate random notes
-    const randomNotes = [];
-    const randomNotesNoNumber = [];
+    let randomNotes = "";
+    let randomNotesNoNumber = "";
     for (let i = 0; i < numberOfNotes; i++) {
       // Randomly select a note from the key signature
-      const randomNote = scaleNotes[Math.floor(Math.random() * scaleNotes.length)];
+      const randomNote =
+        scaleNotes[Math.floor(Math.random() * scaleNotes.length)];
 
       // Generate a random octave (assumed from 1 to 5)
-      const randomOctave = Math.floor(Math.random() * 5) + 1;
+      const randomOctave = Math.random() >= 0.5 ? 4 : 3;
 
       // Combine note and octave and add to the list
-      
-      if (i !== numberOfNotes-1){
-        randomNotes.push(randomNote + randomOctave + ",");
-        randomNotesNoNumber.push(randomNote + ",");
-      }else{
-        randomNotes.push(randomNote + randomOctave);
-        randomNotesNoNumber.push(randomNote);
+
+      if (i !== numberOfNotes - 1) {
+        randomNotes += randomNote + randomOctave + ",";
+        randomNotesNoNumber += randomNote + ",";
+      } else {
+        randomNotes += randomNote + randomOctave;
+        randomNotesNoNumber += randomNote;
       }
     }
+      return [randomNotes, randomNotesNoNumber];
 
-    return [randomNotes, randomNotesNoNumber];
   }
 
-  let [generatedNotes, generatedNotesNoNumber] = generateNoteSet(8)
-  const [notesDisplayed, setNotesDisplayed] = useState("A2");
+  function checkNote() {
+    const firstComma = notesDisplayedNoOctave.indexOf(',');
+    const nextNote = firstComma !== -1 ? notesDisplayedNoOctave.slice(0, firstComma) : notesDisplayedNoOctave;
+    const splicedString = firstComma !== -1 ? notesDisplayed.slice(firstComma + 2) : '';
+    console.log(notesDisplayed)
+    console.log(splicedString)
+    if (nextNote === notePressed) {
+      setResult(prevResult => ({
+          ...prevResult,
+          score: prevResult.score + 1,
+          correctAnswers: prevResult.correctAnswers + 1,
+      }));
+      setNotesDisplayed(splicedString);
+    console.log(notesDisplayed);
+
+  } else {
+      setResult(prevResult => ({
+          ...prevResult,
+          wrongAnswers: prevResult.wrongAnswers + 1,
+      }));
+  }
+  }
+
+  let scaleNotes = Scale.get(midiToNote(id, false) + " " + scale).notes;
+  let scaleName =
+    midiToNote(id) + " " + scale.charAt(0).toUpperCase() + scale.slice(1);
+  let generating = generateNoteSet();
+
+  // Holds the notes that are shown in the stave
+  const [notesDisplayed, setNotesDisplayed] = useState(generating[0]);
+  const [notesDisplayedNoOctave, setNotesDisplayedNoOctave] = useState(generating[1]);
+  const [notePressed, setNotePressed] = useState("");
   const { Factory } = Vex.Flow;
   const outputRef = useRef(null);
 
   const handleButtonClick = (midiNumber) => {
-    setNotesDisplayed(
-      (prevNotesDisplayed) =>
-        prevNotesDisplayed + "," + midiToNote(midiNumber, true)
-    );
+    setNotePressed(midiToNote(midiNumber, false));
+    checkNote();
+    
   };
 
   useEffect(() => {
@@ -177,10 +207,11 @@ const SightreadingPane = () => {
       <h1>SightReading</h1>
       <h2>{scaleName}</h2>
       <h3>{scale.slice(0, 3) + id}</h3>
-      <h3>{getKeySignature(scaleName)}</h3>
-      <h3>{scaleNotes}</h3>
-      <h3>{generatedNotesNoNumber}</h3>
-      <h3>{notesDisplayed}</h3>
+      <h3>{"Right: " + result.correctAnswers}</h3>
+      <h3>{"Wrong: " + result.wrongAnswers}</h3>
+      <h3>{"NotePressed: " + notePressed}</h3>
+      <h3>{"NoteNoOctave: " + notesDisplayedNoOctave}</h3>
+      <h3>{"NoteDisplayed: " + notesDisplayed}</h3>
       <svg ref={outputRef}></svg>
       <Piano
         noteRange={{ first: firstNote, last: lastNote }}
