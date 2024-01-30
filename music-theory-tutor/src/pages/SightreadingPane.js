@@ -5,10 +5,11 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import Soundfont from "soundfont-player";
 import { Vex } from "vexflow";
+import Fab from '@mui/material/Fab';
 
 const SightreadingPane = () => {
-  const firstNote = MidiNumbers.fromNote("c5");
-  const lastNote = MidiNumbers.fromNote("b5");
+  const firstNote = MidiNumbers.fromNote("a4");
+  const lastNote = MidiNumbers.fromNote("c6");
   const { state } = useLocation();
   const { id, scale } = state;
   const [result, setResult] = useState({
@@ -46,8 +47,16 @@ const SightreadingPane = () => {
     lastNote: lastNote,
     keyboardConfig: [
       {
+        natural: "A",
+        flat: "A#",
+      },
+      {
+        natural: "B",
+        flat: "A#",
+      },
+      {
         natural: "C",
-        flat: "Cb",
+        flat: "B#",
       },
       {
         natural: "D",
@@ -59,7 +68,7 @@ const SightreadingPane = () => {
       },
       {
         natural: "F",
-        flat: "Fb",
+        flat: "E#",
       },
       {
         natural: "G",
@@ -72,6 +81,10 @@ const SightreadingPane = () => {
       {
         natural: "B",
         flat: "A#",
+      },
+      {
+        natural: "C",
+        flat: "B#",
       },
     ],
   });
@@ -122,7 +135,8 @@ const SightreadingPane = () => {
         scaleNotes[Math.floor(Math.random() * scaleNotes.length)];
 
       // Generate a random octave (assumed from 1 to 5)
-      const randomOctave = Math.random() >= 0.5 ? 4 : 3;
+      // const randomOctave = Math.random() >= 0.5 ? 4 : 3;
+      const randomOctave = 4;
 
       // Combine note and octave and add to the list
 
@@ -134,32 +148,54 @@ const SightreadingPane = () => {
         randomNotesNoNumber += randomNote;
       }
     }
-      return [randomNotes, randomNotesNoNumber];
-
+    return [randomNotes, randomNotesNoNumber];
   }
 
-  function checkNote() {
-    const firstComma = notesDisplayedNoOctave.indexOf(',');
-    const nextNote = firstComma !== -1 ? notesDisplayedNoOctave.slice(0, firstComma) : notesDisplayedNoOctave;
-    const splicedString = firstComma !== -1 ? notesDisplayed.slice(firstComma + 2) : '';
-    console.log(notesDisplayed)
-    console.log(splicedString)
-    if (nextNote === notePressed) {
-      setResult(prevResult => ({
-          ...prevResult,
-          score: prevResult.score + 1,
-          correctAnswers: prevResult.correctAnswers + 1,
+  function checkNote(notePressed) {
+    const firstComma = notesDisplayedNoOctave.indexOf(",");
+    const nextNote =
+      firstComma !== -1
+        ? notesDisplayedNoOctave.slice(0, firstComma)
+        : notesDisplayedNoOctave;
+    const splicedString =
+      firstComma !== -1 ? notesDisplayed.slice(firstComma + 2) : "";
+    const splicedStringNoOctave =
+      firstComma !== -1 ? notesDisplayedNoOctave.slice(firstComma + 1) : "";
+    let nextNoteGenerate = generateNoteSet(1);
+    const nextNoteOctave = nextNoteGenerate[0];
+    const nextNoteNoOctave = nextNoteGenerate[1];
+    if (nextNote === notePressed && isActive) {
+      setResult((prevResult) => ({
+        ...prevResult,
+        score: prevResult.score + 1,
+        correctAnswers: prevResult.correctAnswers + 1,
       }));
-      setNotesDisplayed(splicedString);
-    console.log(notesDisplayed);
-
-  } else {
-      setResult(prevResult => ({
-          ...prevResult,
-          wrongAnswers: prevResult.wrongAnswers + 1,
+      setNotesDisplayed(splicedString + "," + nextNoteOctave);
+      setNotesDisplayedNoOctave(splicedStringNoOctave + "," + nextNoteNoOctave);
+    } else if (isActive) {
+      setResult((prevResult) => ({
+        ...prevResult,
+        wrongAnswers: prevResult.wrongAnswers + 1,
       }));
+    }
   }
-  }
+
+  const [seconds, setSeconds] = useState(5);
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive && seconds === 0) {
+      setIsActive(false);
+    } else if (isActive) {
+      interval = setInterval(() => {
+        setSeconds((seconds) => seconds - 1);
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
   let scaleNotes = Scale.get(midiToNote(id, false) + " " + scale).notes;
   let scaleName =
@@ -168,15 +204,14 @@ const SightreadingPane = () => {
 
   // Holds the notes that are shown in the stave
   const [notesDisplayed, setNotesDisplayed] = useState(generating[0]);
-  const [notesDisplayedNoOctave, setNotesDisplayedNoOctave] = useState(generating[1]);
-  const [notePressed, setNotePressed] = useState("");
+  const [notesDisplayedNoOctave, setNotesDisplayedNoOctave] = useState(
+    generating[1]
+  );
   const { Factory } = Vex.Flow;
   const outputRef = useRef(null);
 
   const handleButtonClick = (midiNumber) => {
-    setNotePressed(midiToNote(midiNumber, false));
-    checkNote();
-    
+    checkNote(midiToNote(midiNumber, false));
   };
 
   useEffect(() => {
@@ -206,10 +241,12 @@ const SightreadingPane = () => {
     <div>
       <h1>SightReading</h1>
       <h2>{scaleName}</h2>
+      <Fab color="secondary" variant="extended">
+        {seconds}
+      </Fab>
       <h3>{scale.slice(0, 3) + id}</h3>
       <h3>{"Right: " + result.correctAnswers}</h3>
       <h3>{"Wrong: " + result.wrongAnswers}</h3>
-      <h3>{"NotePressed: " + notePressed}</h3>
       <h3>{"NoteNoOctave: " + notesDisplayedNoOctave}</h3>
       <h3>{"NoteDisplayed: " + notesDisplayed}</h3>
       <svg ref={outputRef}></svg>
