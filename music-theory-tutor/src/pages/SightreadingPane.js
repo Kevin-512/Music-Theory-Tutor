@@ -5,7 +5,12 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import Soundfont from "soundfont-player";
 import { Vex } from "vexflow";
-import Fab from '@mui/material/Fab';
+import Fab from "@mui/material/Fab";
+import { Button, Stack, Toolbar } from "@mui/material";
+import Chip from "@mui/material/Chip";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import DangerousIcon from "@mui/icons-material/Dangerous";
+import Results from "./Results";
 
 const SightreadingPane = () => {
   const firstNote = MidiNumbers.fromNote("a4");
@@ -179,9 +184,13 @@ const SightreadingPane = () => {
       }));
     }
   }
+  function displayResults() {
+    setContinueClicked(true);
+  }
 
-  const [seconds, setSeconds] = useState(5);
+  const [seconds, setSeconds] = useState(10);
   const [isActive, setIsActive] = useState(true);
+  const [continueClicked, setContinueClicked] = useState(false);
 
   useEffect(() => {
     let interval = null;
@@ -237,35 +246,68 @@ const SightreadingPane = () => {
     }
   }, [notesDisplayed]);
 
-  return (
-    <div>
-      <h1>SightReading</h1>
-      <h2>{scaleName}</h2>
-      <Fab color="secondary" variant="extended">
-        {seconds}
-      </Fab>
-      <h3>{scale.slice(0, 3) + id}</h3>
-      <h3>{"Right: " + result.correctAnswers}</h3>
-      <h3>{"Wrong: " + result.wrongAnswers}</h3>
-      <h3>{"NoteNoOctave: " + notesDisplayedNoOctave}</h3>
-      <h3>{"NoteDisplayed: " + notesDisplayed}</h3>
-      <svg ref={outputRef}></svg>
-      <Piano
-        noteRange={{ first: firstNote, last: lastNote }}
-        playNote={(midiNumber) => {
-          var ac = new AudioContext();
-          Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
-            piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
-          });
-        }}
-        stopNote={(midiNumber) => {
-          handleButtonClick(midiNumber);
-        }}
-        width={1000}
-        keyboardShortcuts={keyboardShortcuts}
+  if (!continueClicked) {
+    return (
+      <div>
+        <h1>SightReading</h1>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h2 style={{ marginRight: "150px" }}>{scaleName}</h2>
+          <Fab color="secondary" variant="extended">
+            {seconds}
+          </Fab>
+          <div style={{ marginLeft: "80px", marginRight: "80px" }}>
+            <Stack direction="row" spacing={7}>
+              <Chip
+                icon={<DoneOutlineIcon />}
+                label={result.correctAnswers}
+                variant="outlined"
+                color="success"
+              />
+              <Chip
+                icon={<DangerousIcon />}
+                label={result.wrongAnswers}
+                variant="outlined"
+                color="error"
+              />
+            </Stack>
+          </div>
+          <Button
+            variant="contained"
+            disabled={isActive}
+            onClick={displayResults}
+          >
+            Continue
+          </Button>
+        </div>
+
+        <div style={{ marginLeft: "100px" }}>
+          <svg ref={outputRef}></svg>
+        </div>
+        <Piano
+          noteRange={{ first: firstNote, last: lastNote }}
+          playNote={(midiNumber) => {
+            var ac = new AudioContext();
+            Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
+              piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
+            });
+          }}
+          stopNote={(midiNumber) => {
+            handleButtonClick(midiNumber);
+          }}
+          width={1000}
+          keyboardShortcuts={keyboardShortcuts}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <Results
+        correct={result.correctAnswers}
+        wrong={result.wrongAnswers}
+        origin={"SightReading"}
       />
-    </div>
-  );
+    );
+  }
 };
 
 export default SightreadingPane;
