@@ -276,7 +276,7 @@ const SightreadingPane = () => {
             disabled={isActive}
             onClick={displayResults}
           >
-            Continue
+            Results
           </Button>
         </div>
 

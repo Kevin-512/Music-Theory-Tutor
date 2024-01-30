@@ -6,11 +6,17 @@ import {
   ToggleButtonGroup,
   Toolbar,
   Grid,
+  Stack,
+  Chip,
 } from "@mui/material";
 import React, { useState } from "react";
 import * as allQuizzes from "../constant/quizData";
 import StaveBuilder from "../display/StaveBuilder";
 import { useNavigate } from "react-router-dom";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import DangerousIcon from "@mui/icons-material/Dangerous";
+import FeedbackCard from "./FeedbackCard";
+import Results from "../pages/Results";
 
 const QuizCard = (props) => {
   // Called when the next button is pressed
@@ -18,6 +24,9 @@ const QuizCard = (props) => {
   const onClickSubmit = (props) => {
     if (selectedAnswerIndex != null) {
       setQuestionSubmitted(true);
+      if (activeQuestion === questions.length - 1) {
+        setNextButtonText("Results");
+      }
       setResult((prev) =>
         selectedAnswer
           ? {
@@ -43,9 +52,10 @@ const QuizCard = (props) => {
       } else {
         setActiveQuestion(0);
         setLastQuestion(true);
+
         // setResult({ score: 0, correctAnswers: 0, wrongAnswers: 0 });
 
-        console.log("Finished");
+        console.log("Last Question");
       }
     }
   };
@@ -73,6 +83,7 @@ const QuizCard = (props) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [questionSubmitted, setQuestionSubmitted] = useState(false);
   const [lastQuestion, setLastQuestion] = useState(false);
+  const [nextButtonText, setNextButtonText] = useState("Next");
   const [result, setResult] = useState({
     score: 0,
     correctAnswers: 0,
@@ -91,112 +102,132 @@ const QuizCard = (props) => {
 
   const { question, choices } = questions[activeQuestion];
   const [viewMCQ, setViewMCQ] = React.useState("list");
-  const navigate = useNavigate();
 
-  return (
-    <div>
-      <h1>{quizName}</h1>
-      <h2 style={{ display: "flex", justifyContent: "space-between" }}>
-        <span style={{ marginLeft: "100px" }}>
-          {"Score: " +
-            (result.correctAnswers + result.wrongAnswers === 0
-              ? "N/A"
-              : (
-                  Number(
-                    result.correctAnswers /
-                      (result.correctAnswers + result.wrongAnswers)
-                  ).toFixed(4) * 100
-                ).toFixed(2) + "%")}
-        </span>
-        <span>{"Correct: " + result.correctAnswers}</span>
-        <span style={{ marginRight: "100px" }}>
-          {"Wrong: " + result.wrongAnswers}
-        </span>
-      </h2>
+  if (!lastQuestion) {
+    return (
+      <div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h2 style={{ marginRight: "50px" }}>{props.quizTitle}</h2>
+          <div style={{ marginLeft: "50px", marginRight: "80px" }}>
+            <Stack direction="row" spacing={7}>
+              <Chip
+                icon={<DoneOutlineIcon />}
+                label={result.correctAnswers}
+                variant="outlined"
+                color="success"
+              />
+              <Chip
+                icon={<DangerousIcon />}
+                label={result.wrongAnswers}
+                variant="outlined"
+                color="error"
+              />
+            </Stack>
+          </div>
+        </div>
 
-      <Container maxWidth="lg">
-        <h2>{question}</h2>
+        <Container maxWidth="lg">
+          <h2>{question}</h2>
 
-        {/* Display the stave for the question */}
-        <Container maxWidth="lg" style={{ textAlign: "center" }}>
-          {/* <img src={quaver} alt="Quaver" width="250"/> */}
-          <StaveBuilder
-            clef={questions[activeQuestion].clef}
-            timeSig={questions[activeQuestion].timeSig}
-            notes={questions[activeQuestion].notes}
-            keySig={questions[activeQuestion].keySig}
-          />
-
-          {/* Display the list of possible answers to the question */}
-          <ToggleButtonGroup
-            fullWidth
-            orientation="vertical"
-            value={viewMCQ}
-            exclusive
-            onChange={handleChange}
+          {/* Display the stave for the question */}
+          <Container
+            maxWidth="lg"
+            style={{ textAlign: "center", paddingBottom: "10px" }}
           >
-            {choices.map((answer, index) => (
-              <ToggleButton
-                value={index}
-                key={answer}
-                onClick={() => onAnswerSelected(answer, index)}
-                // className={selectedAnswerIndex === index ? "selected-answer" : null}
-              >
-                {answer}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-        </Container>
-        {/* Toolbar creates whitespace */}
-        <Toolbar />
+            {/* <img src={quaver} alt="Quaver" width="250"/> */}
+            <StaveBuilder
+              clef={questions[activeQuestion].clef}
+              timeSig={questions[activeQuestion].timeSig}
+              notes={questions[activeQuestion].notes}
+              keySig={questions[activeQuestion].keySig}
+            />
 
-        {/* Code for question navigation button */}
-        <Container style={{ display: "flex", justifyContent: "center" }}>
-          <Grid
-            style={{ display: "flex", justifyContent: "center" }}
-            container
-            spacing={20}
-            justify="space-between"
-          >
-            {/* Submit Button */}
-            <Grid item>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  console.log("Submitting");
-                  onClickSubmit();
-                }}
-                disabled={
-                  selectedAnswer === "" ||
-                  selectedAnswerIndex === null ||
-                  questionSubmitted === true
-                }
-              >
-                Submit
-              </Button>
-            </Grid>
-            {/* Next Button */}
-            <Grid item>
-              <Button
-                disabled={questionSubmitted === false}
-                variant="contained"
-                onClick={() => {
-                  if (lastQuestion === true) {
-                    navigate("/quizmap");
-                  } else {
+            {/* Display the list of possible answers to the question */}
+            <ToggleButtonGroup
+              fullWidth
+              orientation="vertical"
+              value={viewMCQ}
+              exclusive
+              onChange={handleChange}
+              disabled={questionSubmitted}
+            >
+              {choices.map((answer, index) => (
+                <ToggleButton
+                  value={index}
+                  key={answer}
+                  onClick={() => onAnswerSelected(answer, index)}
+                  // className={selectedAnswerIndex === index ? "selected-answer" : null}
+                >
+                  {answer}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+          </Container>
+          {/* Toolbar creates whitespace */}
+
+          {/* Code for question navigation button */}
+          <Container style={{ display: "flex", justifyContent: "center" }}>
+            <Grid
+              style={{ display: "flex", justifyContent: "center" }}
+              container
+              spacing={20}
+              justify="space-between"
+            >
+              {/* Submit Button */}
+              <Grid item>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    console.log("Submitting");
+                    onClickSubmit();
+                  }}
+                  disabled={
+                    selectedAnswer === "" ||
+                    selectedAnswerIndex === null ||
+                    questionSubmitted === true
+                  }
+                >
+                  Submit
+                </Button>
+              </Grid>
+              {/* Next Button */}
+              <Grid item>
+                <Button
+                  disabled={questionSubmitted === false}
+                  variant="contained"
+                  onClick={() => {
                     onClickNext();
                     handleChange();
-                  }
-                }}
-              >
-                Next
-              </Button>
+                  }}
+                >
+                  {nextButtonText}
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          </Container>
+          <Container style={{ paddingTop: "20px" }}>
+            <div style={{ paddingLeft: "300px" }}>
+              <FeedbackCard
+                display={questionSubmitted}
+                result={selectedAnswer}
+                feedback={questions[activeQuestion].correctAnswer}
+              />
+            </div>
+          </Container>
         </Container>
-      </Container>
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Results
+          correct={result.correctAnswers}
+          wrong={result.wrongAnswers}
+          origin={"Quizzes"}
+        />
+      </div>
+    );
+  }
 };
 
 export default QuizCard;

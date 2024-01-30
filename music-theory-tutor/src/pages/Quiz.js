@@ -5,6 +5,7 @@ import QuizCard from "../component/QuizCard";
 const Quiz = () => {
   const { state } = useLocation();
   const { id, scale } = state;
+  let quizTitle = midiToNote(id) + " " + scale.charAt(0).toUpperCase() + scale.slice(1)
 
   function midiToNote(midiNumber){
     const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -15,8 +16,7 @@ const Quiz = () => {
   return (
     <div>
       <h1>Quiz</h1>
-      <h2>{midiToNote(id)} {scale.charAt(0).toUpperCase() + scale.slice(1)}</h2>
-      <QuizCard quizId={id} quizScale={scale.slice(0,3)}/>
+      <QuizCard quizId={id} quizScale={scale.slice(0,3)} quizTitle={quizTitle}/>
     </div>
   );
 };
