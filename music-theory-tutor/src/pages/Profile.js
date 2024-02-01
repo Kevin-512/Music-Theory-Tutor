@@ -1,8 +1,12 @@
 import React from 'react'
+import LoginCard from '../component/LoginCard'
 
 const Profile = () => {
-  return (
+  return (<div>
     <h1>Profile</h1>
+    <LoginCard/>
+  </div>
+
   )
 }
 
