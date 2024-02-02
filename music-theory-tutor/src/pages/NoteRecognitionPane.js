@@ -12,7 +12,7 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import Results from "./Results";
 
-const SightreadingPane = () => {
+const NoteRecognitionPane = () => {
   const firstNote = MidiNumbers.fromNote("a4");
   const lastNote = MidiNumbers.fromNote("c6");
   const { state } = useLocation();
@@ -335,4 +335,4 @@ const SightreadingPane = () => {
   }
 };
 
-export default SightreadingPane;
+export default NoteRecognitionPane;

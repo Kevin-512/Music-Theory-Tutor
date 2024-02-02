@@ -5,7 +5,7 @@ import Soundfont from "soundfont-player";
 import { useNavigate } from "react-router-dom";
 import { ToggleButtonGroup, ToggleButton, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-const Sightreading = () => {
+const NoteRecognition = () => {
   const [alignment, setAlignment] = React.useState("major");
   const [time, setTime] = React.useState(30);
   const navigate = useNavigate();
@@ -117,4 +117,4 @@ const Sightreading = () => {
   );
 };
 
-export default Sightreading;
+export default NoteRecognition;
