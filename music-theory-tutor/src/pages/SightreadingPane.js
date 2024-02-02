@@ -16,7 +16,7 @@ const SightreadingPane = () => {
   const firstNote = MidiNumbers.fromNote("a4");
   const lastNote = MidiNumbers.fromNote("c6");
   const { state } = useLocation();
-  const { id, scale } = state;
+  const { id, scale, limit } = state;
   const [result, setResult] = useState({
     score: 0,
     correctAnswers: 0,
@@ -45,6 +45,30 @@ const SightreadingPane = () => {
     } else {
       return notes[noteIndex - 1];
     }
+  }
+
+  function noteToMidi(note) {
+    let note_dict = {
+      C: 0,
+      "C#": 1,
+      Db: 1,
+      D: 2,
+      "D#": 3,
+      Eb: 3,
+      E: 4,
+      F: 5,
+      "F#": 6,
+      Gb: 6,
+      G: 7,
+      "G#": 8,
+      Ab: 8,
+      A: 9,
+      "A#": 10,
+      Bb: 10,
+      B: 11,
+    };
+
+    return note_dict[note]
   }
 
   const keyboardShortcuts = KeyboardShortcuts.create({
@@ -169,7 +193,7 @@ const SightreadingPane = () => {
     let nextNoteGenerate = generateNoteSet(1);
     const nextNoteOctave = nextNoteGenerate[0];
     const nextNoteNoOctave = nextNoteGenerate[1];
-    if (nextNote === notePressed && isActive) {
+    if (noteToMidi(nextNote) === noteToMidi(notePressed) && isActive) {
       setResult((prevResult) => ({
         ...prevResult,
         score: prevResult.score + 1,
@@ -188,7 +212,7 @@ const SightreadingPane = () => {
     setContinueClicked(true);
   }
 
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(limit);
   const [isActive, setIsActive] = useState(true);
   const [continueClicked, setContinueClicked] = useState(false);
 
@@ -290,9 +314,10 @@ const SightreadingPane = () => {
             Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
               piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
             });
+            handleButtonClick(midiNumber);
           }}
           stopNote={(midiNumber) => {
-            handleButtonClick(midiNumber);
+            
           }}
           width={1000}
           keyboardShortcuts={keyboardShortcuts}
