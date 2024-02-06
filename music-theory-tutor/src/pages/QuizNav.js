@@ -9,6 +9,7 @@ import {
   Toolbar,
   Container,
 } from "@mui/material";
+import TitleGrid from "../component/TitleGrid";
 
 const QuizNav = () => {
   const [alignment, setAlignment] = React.useState("major");
@@ -63,7 +64,15 @@ const QuizNav = () => {
 
   return (
     <Container>
-      <h1>Quiz</h1>
+      <TitleGrid
+        title={"Quizzes"}
+        description={
+          "Choose a note to begin the exercise"
+        }
+        image={"https://images.pexels.com/photos/5428829/pexels-photo-5428829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+        imageText={"main image description"}
+        color={"aqua"}
+      />
 
       <Piano
         noteRange={{ first: firstNote, last: lastNote }}

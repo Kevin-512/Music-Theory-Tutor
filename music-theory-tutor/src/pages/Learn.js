@@ -10,11 +10,20 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import TitleGrid from "../component/TitleGrid";
 
 const Learn = () => {
   return (
     <Container maxWidth="xl">
-      <h1>Learn</h1>
+      <TitleGrid
+        title={"Learn"}
+        description={
+          "Explore the music theory resources available"
+        }
+        image={"https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600"}
+        imageText={"main image description"}
+        color={"aqua"}
+      />
       <Grid container spacing={4}>
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card

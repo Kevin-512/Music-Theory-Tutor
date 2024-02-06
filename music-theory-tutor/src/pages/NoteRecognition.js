@@ -12,6 +12,7 @@ import {
   MenuItem,
   Container,
 } from "@mui/material";
+import TitleGrid from "../component/TitleGrid";
 
 const NoteRecognition = () => {
   const [alignment, setAlignment] = React.useState("major");
@@ -71,8 +72,15 @@ const NoteRecognition = () => {
 
   return (
     <Container maxWidth="xl">
-      <h1>SightReading</h1>
-      <h1>Select a scale to begin</h1>
+      <TitleGrid
+        title={"Note Recall"}
+        description={
+          "Choose a note to begin the exercise"
+        }
+        image={"https://images.pexels.com/photos/14990223/pexels-photo-14990223/free-photo-of-close-up-photo-of-a-music-sheet.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+        imageText={"main image description"}
+        color={"aqua"}
+      />
 
       <div>
         <Piano
@@ -95,7 +103,7 @@ const NoteRecognition = () => {
         />
 
         <div
-          style={{ padding: "50px", justifyContent: "left", display: "flex" }}
+          style={{paddingTop: "50px", justifyContent: "left", display: "flex" }}
         >
           <ToggleButtonGroup
             style={{ marginRight: "30px" }}

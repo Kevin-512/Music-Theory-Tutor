@@ -90,8 +90,9 @@ app.post("/api/register", (req, res, next) => {
   });
 });
 
-// User login
+// Add to results
 
+// User login
 app.post("/api/validate", (req, res) => {
   var errors = [];
   if (!req.body.password) {

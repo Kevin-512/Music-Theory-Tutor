@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import Sidebar from "./component/Sidebar";
-import { Container, Toolbar } from "@mui/material";
+import { Container, ThemeProvider, Toolbar, createTheme } from "@mui/material";
 import Learn from "./pages/Learn";
 import NoteRecognition from "./pages/NoteRecognition";
 import QuizNav from "./pages/QuizNav";
@@ -16,8 +16,16 @@ import RegisterCard from "./component/RegisterCard";
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [userID, setUserID] = useState(0);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#883bc4',
+      },
+    },
+  });
 
   return (
+    <ThemeProvider theme={theme}>
     <Container>
       <Router>
         <Sidebar />
@@ -45,6 +53,7 @@ function App() {
         </Routes>
       </Router>
     </Container>
+    </ThemeProvider>
   );
 }
 
