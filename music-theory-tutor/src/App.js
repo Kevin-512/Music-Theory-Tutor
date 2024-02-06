@@ -10,8 +10,13 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Quiz from "./pages/Quiz";
 import NoteRecognitionPane from "./pages/NoteRecognitionPane";
+import { useState } from "react";
+import RegisterCard from "./component/RegisterCard";
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [userID, setUserID] = useState(0);
+
   return (
     <Router>
       <Sidebar />
@@ -23,10 +28,11 @@ function App() {
           <Route path="/learn" element={<Learn />} />
           <Route path="/sightreading" element={<NoteRecognition />} />
           <Route path="/quizmap" element={<QuizNav />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile authenticated={authenticated} setAuthenticated={setAuthenticated} setUserID={setUserID}/>} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/sightreadingquiz" element={<NoteRecognitionPane />} />
+          <Route path="/register" element={<RegisterCard />} />
         </Routes>
       </div>
     </Router>

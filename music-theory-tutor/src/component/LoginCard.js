@@ -1,6 +1,7 @@
 //Reference - https://github.com/mui/material-ui/blob/v5.15.7/docs/data/material/getting-started/templates/sign-in/SignIn.js
 
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,15 +15,34 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-const LoginCard = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+const LoginCard = ({setAuthenticated, setUserID}) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  
+  async function loginUser(credentials) {
+    return fetch('http://localhost:8000/api/validate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(data => data.json())
+   }
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const token = await loginUser({
+      email,
+      password
     });
-  };
+    console.log(token)
+    if (token.validation){
+      setAuthenticated(true)
+      setUserID(token.data.id)
+    }
+;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -49,6 +69,7 @@ const LoginCard = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -59,6 +80,7 @@ const LoginCard = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -79,7 +101,7 @@ const LoginCard = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

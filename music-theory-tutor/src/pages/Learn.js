@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Learn = () => {
   return (
-    <div style={{ paddingTop: "40px" }}>
+    <div style={{}}>
       <h1>Learn</h1>
       <Container>
         <Grid container spacing={4}>
