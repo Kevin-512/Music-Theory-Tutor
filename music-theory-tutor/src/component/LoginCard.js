@@ -18,6 +18,7 @@ import Container from "@mui/material/Container";
 const LoginCard = ({setAuthenticated, setUserID}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [displayMessage, setDisplayMessage] = useState();
   
   async function loginUser(credentials) {
     return fetch('http://localhost:8000/api/validate', {
@@ -40,6 +41,8 @@ const LoginCard = ({setAuthenticated, setUserID}) => {
     if (token.validation){
       setAuthenticated(true)
       setUserID(token.data.id)
+    }else{
+      setDisplayMessage("Incorrect or Missing Details")
     }
 ;
   }
@@ -86,6 +89,9 @@ const LoginCard = ({setAuthenticated, setUserID}) => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          <Box>
+        <Typography style={{ color: 'red' }} variant="body2" color="text.secondary" align="right">{displayMessage}</Typography>
+          </Box>
           <Button
             type="submit"
             fullWidth
@@ -94,6 +100,7 @@ const LoginCard = ({setAuthenticated, setUserID}) => {
           >
             Sign In
           </Button>
+          
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

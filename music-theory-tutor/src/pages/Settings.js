@@ -1,9 +1,12 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
 
 const Settings = () => {
   return (
-    <h1>Settings</h1>
-  )
-}
+    <Container>
+      <h1>Settings</h1>
+    </Container>
+  );
+};
 
-export default Settings
+export default Settings;

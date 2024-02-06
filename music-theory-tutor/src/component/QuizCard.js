@@ -105,7 +105,7 @@ const QuizCard = (props) => {
 
   if (!lastQuestion) {
     return (
-      <div>
+      <Container maxWidth="xl">
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "50px" }}>{props.quizTitle}</h2>
           <div style={{ marginLeft: "50px", marginRight: "80px" }}>
@@ -215,17 +215,17 @@ const QuizCard = (props) => {
             </div>
           </Container>
         </Container>
-      </div>
+      </Container>
     );
   } else {
     return (
-      <div>
+      <Container>
         <Results
           correct={result.correctAnswers}
           wrong={result.wrongAnswers}
           origin={"Quizzes"}
         />
-      </div>
+      </Container>
     );
   }
 };

@@ -6,7 +6,7 @@ import "react-piano/dist/styles.css";
 import Soundfont from "soundfont-player";
 import { Vex } from "vexflow";
 import Fab from "@mui/material/Fab";
-import { Button, Stack, Toolbar } from "@mui/material";
+import { Button, Container, Stack, Toolbar } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DangerousIcon from "@mui/icons-material/Dangerous";
@@ -272,7 +272,7 @@ const NoteRecognitionPane = () => {
 
   if (!continueClicked) {
     return (
-      <div>
+      <Container>
         <h1>SightReading</h1>
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "150px" }}>{scaleName}</h2>
@@ -322,7 +322,7 @@ const NoteRecognitionPane = () => {
           width={1000}
           keyboardShortcuts={keyboardShortcuts}
         />
-      </div>
+      </Container>
     );
   } else {
     return (

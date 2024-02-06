@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import Sidebar from "./component/Sidebar";
-import { Toolbar } from "@mui/material";
+import { Container, Toolbar } from "@mui/material";
 import Learn from "./pages/Learn";
 import NoteRecognition from "./pages/NoteRecognition";
 import QuizNav from "./pages/QuizNav";
@@ -18,24 +18,33 @@ function App() {
   const [userID, setUserID] = useState(0);
 
   return (
-    <Router>
-      <Sidebar />
-      <Navbar />
-      <Toolbar />
-      <div style={{ paddingLeft: 300 }}>
+    <Container>
+      <Router>
+        <Sidebar />
+        <Navbar />
+        <Toolbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/sightreading" element={<NoteRecognition />} />
           <Route path="/quizmap" element={<QuizNav />} />
-          <Route path="/profile" element={<Profile authenticated={authenticated} setAuthenticated={setAuthenticated} setUserID={setUserID}/>} />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                authenticated={authenticated}
+                setAuthenticated={setAuthenticated}
+                setUserID={setUserID}
+              />
+            }
+          />
           <Route path="/settings" element={<Settings />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/sightreadingquiz" element={<NoteRecognitionPane />} />
           <Route path="/register" element={<RegisterCard />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </Container>
   );
 }
 

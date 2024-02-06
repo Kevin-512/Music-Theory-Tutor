@@ -3,7 +3,15 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import Soundfont from "soundfont-player";
 import { useNavigate } from "react-router-dom";
-import { ToggleButtonGroup, ToggleButton, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  ToggleButtonGroup,
+  ToggleButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Container,
+} from "@mui/material";
 
 const NoteRecognition = () => {
   const [alignment, setAlignment] = React.useState("major");
@@ -62,7 +70,7 @@ const NoteRecognition = () => {
   };
 
   return (
-    <div>
+    <Container maxWidth="xl">
       <h1>SightReading</h1>
       <h1>Select a scale to begin</h1>
 
@@ -85,9 +93,12 @@ const NoteRecognition = () => {
           // Can use this property to change the width of the key: keyWidthToHeight={0.5}
           keyboardShortcuts={keyboardShortcuts}
         />
-        
-        <div style={{padding: "50px",justifyContent: "left", display: "flex"}}>
-          <ToggleButtonGroup style={{ marginRight: "30px" }}
+
+        <div
+          style={{ padding: "50px", justifyContent: "left", display: "flex" }}
+        >
+          <ToggleButtonGroup
+            style={{ marginRight: "30px" }}
             value={alignment}
             exclusive
             onChange={handleChange}
@@ -95,25 +106,20 @@ const NoteRecognition = () => {
             <ToggleButton value="major">Major</ToggleButton>
             <ToggleButton value="minor">Minor</ToggleButton>
           </ToggleButtonGroup>
-          <FormControl >
-  <InputLabel >Time</InputLabel>
-  <Select
-    value={time}
-    label="Time"
-    onChange={changeTime}
-  > 
-    <MenuItem value={10}>10</MenuItem>
-    <MenuItem value={20}>20</MenuItem>
-    <MenuItem value={30}>30</MenuItem>
-    <MenuItem value={40}>40</MenuItem>
-    <MenuItem value={50}>50</MenuItem>
-    <MenuItem value={60}>60</MenuItem>
-    
-  </Select>
-</FormControl>
+          <FormControl>
+            <InputLabel>Time</InputLabel>
+            <Select value={time} label="Time" onChange={changeTime}>
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={20}>20</MenuItem>
+              <MenuItem value={30}>30</MenuItem>
+              <MenuItem value={40}>40</MenuItem>
+              <MenuItem value={50}>50</MenuItem>
+              <MenuItem value={60}>60</MenuItem>
+            </Select>
+          </FormControl>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

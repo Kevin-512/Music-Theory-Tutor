@@ -1,20 +1,19 @@
 import React from 'react'
 import LoginCard from '../component/LoginCard'
+import { Container } from '@mui/material';
 
 const Profile = ({authenticated, setAuthenticated, setUserID}) => {
   if (!authenticated) {
     return (
-      <div>
-        <h1>Profile</h1>
+      <Container>
         <LoginCard setAuthenticated={setAuthenticated} setUserID={setUserID}/>
-      </div>
+      </Container>
     );
   }
   return (
-    <div>
-      <h1>Profile</h1>
+    <Container>
       <p>User is authenticated!</p>
-    </div>
+    </Container>
   );
 };
 

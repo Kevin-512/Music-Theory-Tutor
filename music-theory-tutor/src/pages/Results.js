@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
@@ -23,7 +23,7 @@ const Results = (props) => {
   }
 
   return (
-    <div>
+    <Container>
       <h2>Results</h2>
       <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
         <ResponsiveContainer width="20%" height={250}>
@@ -56,7 +56,7 @@ const Results = (props) => {
       <Button onClick={onClick} variant="contained">
         Return
       </Button>
-    </div>
+    </Container>
   );
 };
 
