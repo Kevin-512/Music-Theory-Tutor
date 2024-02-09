@@ -272,7 +272,7 @@ const NoteRecognitionPane = () => {
 
   if (!continueClicked) {
     return (
-      <Container>
+      <Container maxWidth="md">
         <h1>SightReading</h1>
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "150px" }}>{scaleName}</h2>
@@ -322,6 +322,7 @@ const NoteRecognitionPane = () => {
           width={1000}
           keyboardShortcuts={keyboardShortcuts}
         />
+        <Toolbar/>
       </Container>
     );
   } else {

@@ -97,6 +97,7 @@ const QuizNav = () => {
         <ToggleButton value="major">Major</ToggleButton>
         <ToggleButton value="minor">Minor</ToggleButton>
       </ToggleButtonGroup>
+      <Toolbar/>
     </Container>
   );
 };

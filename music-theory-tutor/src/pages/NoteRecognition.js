@@ -82,7 +82,6 @@ const NoteRecognition = () => {
         color={"#ca0900"}
       />
 
-      <div>
         <Piano
           noteRange={{ first: firstNote, last: lastNote }}
           playNote={(midiNumber) => {
@@ -103,7 +102,7 @@ const NoteRecognition = () => {
         />
 
         <div
-          style={{paddingTop: "50px", justifyContent: "left", display: "flex" }}
+          style={{paddingTop: "50px", justifyContent: "left", display: "flex", paddingBottom: "50px" }}
         >
           <ToggleButtonGroup
             style={{ marginRight: "30px" }}
@@ -126,8 +125,8 @@ const NoteRecognition = () => {
             </Select>
           </FormControl>
         </div>
-      </div>
     </Container>
+
   );
 };
 
