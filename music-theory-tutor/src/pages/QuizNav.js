@@ -71,7 +71,7 @@ const QuizNav = () => {
         }
         image={"https://images.pexels.com/photos/5428829/pexels-photo-5428829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
         imageText={"main image description"}
-        color={"aqua"}
+        color={"#36c3c9"}
       />
 
       <Piano

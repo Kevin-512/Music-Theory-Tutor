@@ -12,6 +12,7 @@ import Quiz from "./pages/Quiz";
 import NoteRecognitionPane from "./pages/NoteRecognitionPane";
 import { useState } from "react";
 import RegisterCard from "./component/RegisterCard";
+import History from "./pages/History";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -20,6 +21,9 @@ function App() {
     palette: {
       primary: {
         main: '#883bc4',
+      },
+      background: {
+        default: '#fffbf2',
       },
     },
   });
@@ -50,6 +54,7 @@ function App() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/sightreadingquiz" element={<NoteRecognitionPane />} />
           <Route path="/register" element={<RegisterCard />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </Router>
     </Container>

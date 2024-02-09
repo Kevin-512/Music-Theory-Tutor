@@ -14,15 +14,15 @@ import TitleGrid from "../component/TitleGrid";
 
 const Learn = () => {
   return (
-    <Container maxWidth="xl">
-      <TitleGrid
+    <Container maxWidth="lg">
+      <TitleGrid 
         title={"Learn"}
         description={
-          "Explore the music theory resources available"
+          "Explore the music theory resources"
         }
         image={"https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600"}
         imageText={"main image description"}
-        color={"aqua"}
+        color={"#41b638"}
       />
       <Grid container spacing={4}>
         <Grid item={1} xs={12} sm={6} md={4}>
@@ -38,7 +38,7 @@ const Learn = () => {
                 image="https://source.unsplash.com/random?wallpapers"
               />
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" >
                   Learn
                 </Typography>
                 <Typography>

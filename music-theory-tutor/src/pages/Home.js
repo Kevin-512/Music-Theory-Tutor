@@ -11,11 +11,17 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import TitleGrid from "../component/TitleGrid";
 
 const Home = () => {
   return (
-    <div style={{ paddingTop: "40px" }}>
-      <Container>
+      <Container maxWidth="lg">
+      <TitleGrid 
+        title={"Home"}
+        image={"https://images.pexels.com/photos/164935/pexels-photo-164935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+        imageText={"main image description"}
+        color={"#44e41b"}
+      />
         <Grid container spacing={4}>
           <Grid item={1} xs={12} sm={6} md={4}>
             <Card
@@ -94,7 +100,6 @@ const Home = () => {
           </Grid>
         </Grid>
       </Container>
-    </div>
   );
 };
 

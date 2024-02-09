@@ -15,7 +15,7 @@ const Quiz = () => {
   }
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <h1>Quiz</h1>
       <QuizCard quizId={id} quizScale={scale.slice(0,3)} quizTitle={quizTitle}/>
     </Container>

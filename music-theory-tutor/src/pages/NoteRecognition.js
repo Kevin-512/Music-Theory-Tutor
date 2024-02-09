@@ -71,7 +71,7 @@ const NoteRecognition = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <TitleGrid
         title={"Note Recall"}
         description={
@@ -79,7 +79,7 @@ const NoteRecognition = () => {
         }
         image={"https://images.pexels.com/photos/14990223/pexels-photo-14990223/free-photo-of-close-up-photo-of-a-music-sheet.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
         imageText={"main image description"}
-        color={"aqua"}
+        color={"#ca0900"}
       />
 
       <div>
