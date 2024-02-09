@@ -6,7 +6,7 @@ import TitleGrid from "../component/TitleGrid";
 const Profile = ({ authenticated, setAuthenticated, setUserID }) => {
   if (!authenticated) {
     return (
-      <Container>
+      <Container maxWidth="md">
         <TitleGrid
           title={"Profile"}
           image={

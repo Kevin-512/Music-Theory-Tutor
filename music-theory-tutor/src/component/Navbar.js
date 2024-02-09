@@ -19,7 +19,7 @@ const Navbar = () => {
       // Colour to place in sx in line below bgcolor: "#993ac5",
       sx={{  zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Toolbar>
           {/* Code for the Title and Logo */}
           <MusicNoteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

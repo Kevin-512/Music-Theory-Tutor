@@ -15,7 +15,7 @@ import TitleGrid from "../component/TitleGrid";
 
 const Home = () => {
   return (
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
       <TitleGrid 
         title={"Home"}
         image={"https://images.pexels.com/photos/164935/pexels-photo-164935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}

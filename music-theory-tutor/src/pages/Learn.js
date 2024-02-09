@@ -14,7 +14,7 @@ import TitleGrid from "../component/TitleGrid";
 
 const Learn = () => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <TitleGrid 
         title={"Learn"}
         description={

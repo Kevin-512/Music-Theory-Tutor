@@ -22,7 +22,7 @@ const drawerWidth = 240;
 const Sidebar = () => {
   return (
     // Declares the box for the side of the page
-    <Container>
+    <Container maxWidth="md">
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Drawer

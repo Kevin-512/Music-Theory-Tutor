@@ -63,7 +63,7 @@ const QuizNav = () => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="md">
       <TitleGrid
         title={"Quizzes"}
         description={

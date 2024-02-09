@@ -105,7 +105,7 @@ const QuizCard = (props) => {
 
   if (!lastQuestion) {
     return (
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "50px" }}>{props.quizTitle}</h2>
           <div style={{ marginLeft: "50px", marginRight: "80px" }}>
@@ -126,12 +126,12 @@ const QuizCard = (props) => {
           </div>
         </div>
 
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
           <h2>{question}</h2>
 
           {/* Display the stave for the question */}
           <Container
-            maxWidth="lg"
+            maxWidth="md"
             style={{ textAlign: "center", paddingBottom: "10px" }}
           >
             {/* <img src={quaver} alt="Quaver" width="250"/> */}

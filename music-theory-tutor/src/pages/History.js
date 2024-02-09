@@ -4,7 +4,7 @@ import TitleGrid from "../component/TitleGrid";
 
 const History = () => {
   return (
-    <Container>
+    <Container maxWidth="md">
       <TitleGrid 
         title={"History"}
         description={
