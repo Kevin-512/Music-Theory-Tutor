@@ -15,7 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-const LoginCard = ({setAuthenticated, setUserID}) => {
+const LoginCard = ({setAuthenticated, setUserID, setUserName}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [displayMessage, setDisplayMessage] = useState();
@@ -41,6 +41,7 @@ const LoginCard = ({setAuthenticated, setUserID}) => {
     if (token.validation){
       setAuthenticated(true)
       setUserID(token.data.id)
+      setUserName(token.data.name)
     }else{
       setDisplayMessage("Incorrect or Missing Details")
     };

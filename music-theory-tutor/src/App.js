@@ -13,10 +13,12 @@ import NoteRecognitionPane from "./pages/NoteRecognitionPane";
 import { useState } from "react";
 import RegisterCard from "./component/RegisterCard";
 import History from "./pages/History";
+import NoteListening from "./pages/NoteListening";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [userID, setUserID] = useState(0);
+  const [userName, setUserName] = useState("");
   const theme = createTheme({
     palette: {
       primary: {
@@ -47,6 +49,8 @@ function App() {
                   authenticated={authenticated}
                   setAuthenticated={setAuthenticated}
                   setUserID={setUserID}
+                  setUserName={setUserName}
+                  userName={userName}
                 />
               }
             />
@@ -65,6 +69,7 @@ function App() {
                 />
               }
             />
+            <Route path="/notelistening" element={<NoteListening />} />
           </Routes>
         </Router>
       </Container>
