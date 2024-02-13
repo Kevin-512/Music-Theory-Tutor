@@ -15,12 +15,12 @@ import TitleGrid from "../component/TitleGrid";
 const Learn = () => {
   return (
     <Container maxWidth="md">
-      <TitleGrid 
+      <TitleGrid
         title={"Learn"}
-        description={
-          "Explore the music theory resources"
+        description={"Explore the music theory resources"}
+        image={
+          "https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600"
         }
-        image={"https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600"}
         imageText={"main image description"}
         color={"#41b638"}
       />
@@ -29,46 +29,50 @@ const Learn = () => {
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
-            <CardActionArea component={Link} to="/learn">
+            <CardActionArea
+              component={Link}
+              to="https://en.wikipedia.org/wiki/Rhythm"
+            >
               <CardMedia
                 component="div"
                 sx={{
                   pt: "56.25%",
                 }}
-                image="https://source.unsplash.com/random?wallpapers"
+                image="https://images.pexels.com/photos/804269/pexels-photo-804269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2" >
-                  Learn
+                <Typography gutterBottom variant="h5" component="h2">
+                  Rhythm
                 </Typography>
                 <Typography>
-                  Find links to useful resources to boost your music theory
-                  knowledge before you take quizzes
+                  Discover the foundation of music and the importance of maintaining rhythm
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
-
-        <Grid item={2} xs={12} sm={6} md={4}>
+        <Grid item={1} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
-            <CardActionArea component={Link} to="/quizmap">
+            <CardActionArea
+              component={Link}
+              to="https://en.wikipedia.org/wiki/Scale_(music)"
+            >
               <CardMedia
                 component="div"
                 sx={{
                   pt: "56.25%",
                 }}
-                image="https://source.unsplash.com/random?wallpapers"
+                image="https://images.pexels.com/photos/164821/pexels-photo-164821.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Quizzes
+                  Scales
                 </Typography>
                 <Typography>
-                  Find quizzes for every music scale and test your knowledge to
-                  see how well you know them
+                  Explore the different scales and the sounds that belong to
+                  each one
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -79,22 +83,24 @@ const Learn = () => {
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
-            <CardActionArea component={Link} to="/sightreading">
+            <CardActionArea
+              component={Link}
+              to="https://en.wikipedia.org/wiki/Pitch_(music)"
+            >
               <CardMedia
                 component="div"
                 sx={{
                   pt: "56.25%",
                 }}
-                image="https://source.unsplash.com/random?wallpapers"
+                image="https://images.pexels.com/photos/157534/pexels-photo-157534.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Sight Reading
+                  Pitches
                 </Typography>
                 <Typography>
-                  Find yourself in a time restrictive situation where you'll
-                  need to correctly read the notes off a stave as quickly as
-                  possible
+                  Unravel music pitches and the fundamental tones that form
+                  melodies and define harmonies
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -105,21 +111,23 @@ const Learn = () => {
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
-            <CardActionArea component={Link} to="/learn">
+            <CardActionArea
+              component={Link}
+              to="https://en.wikipedia.org/wiki/Chord_(music)"
+            >
               <CardMedia
                 component="div"
                 sx={{
                   pt: "56.25%",
                 }}
-                image="https://source.unsplash.com/random?wallpapers"
+                image="https://images.pexels.com/photos/164737/pexels-photo-164737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Learn
+                  Chords
                 </Typography>
                 <Typography>
-                  Find links to useful resources to boost your music theory
-                  knowledge before you take quizzes
+                  Learn about the different chords and discover the patterns that make a chord what it is
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -130,46 +138,51 @@ const Learn = () => {
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
-            <CardActionArea component={Link} to="/learn">
+            <CardActionArea
+              component={Link}
+              to="https://en.wikipedia.org/wiki/Interval_(music)"
+            >
               <CardMedia
                 component="div"
                 sx={{
                   pt: "56.25%",
                 }}
-                image="https://source.unsplash.com/random?wallpapers"
+                image="https://images.pexels.com/photos/39396/hourglass-time-hours-sand-39396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Learn
+                  Intervals
                 </Typography>
                 <Typography>
-                  Find links to useful resources to boost your music theory
-                  knowledge before you take quizzes
+                  Find out more about intervals and why we need them when playing music
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
-        <Grid item={1} xs={12} sm={6} md={4}>
+        <Grid item={2} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
-            <CardActionArea component={Link} to="/learn">
+            <CardActionArea
+              component={Link}
+              to="https://en.wikipedia.org/wiki/Arpeggio"
+            >
               <CardMedia
                 component="div"
                 sx={{
                   pt: "56.25%",
                 }}
-                image="https://source.unsplash.com/random?wallpapers"
+                image="https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Learn
+                  Arpeggios
                 </Typography>
                 <Typography>
-                  Find links to useful resources to boost your music theory
-                  knowledge before you take quizzes
+                  Learn about the broken chords called Arpeggios and there
+                  importance
                 </Typography>
               </CardContent>
             </CardActionArea>

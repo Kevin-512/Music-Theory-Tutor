@@ -20,44 +20,54 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#883bc4',
+        main: "#883bc4",
       },
       background: {
-        default: '#fffbf2',
+        default: "#fffbf2",
       },
     },
   });
 
   return (
     <ThemeProvider theme={theme}>
-    <Container>
-      <Router>
-        <Sidebar />
-        <Navbar />
-        <Toolbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/learn" element={<Learn />} />
-          <Route path="/sightreading" element={<NoteRecognition />} />
-          <Route path="/quizmap" element={<QuizNav />} />
-          <Route
-            path="/profile"
-            element={
-              <Profile
-                authenticated={authenticated}
-                setAuthenticated={setAuthenticated}
-                setUserID={setUserID}
-              />
-            }
-          />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/sightreadingquiz" element={<NoteRecognitionPane />} />
-          <Route path="/register" element={<RegisterCard />} />
-          <Route path="/history" element={<History />} />
-        </Routes>
-      </Router>
-    </Container>
+      <Container>
+        <Router>
+          <Sidebar />
+          <Navbar />
+          <Toolbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/learn" element={<Learn />} />
+            <Route path="/sightreading" element={<NoteRecognition />} />
+            <Route path="/quizmap" element={<QuizNav />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  authenticated={authenticated}
+                  setAuthenticated={setAuthenticated}
+                  setUserID={setUserID}
+                />
+              }
+            />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/sightreadingquiz" element={<NoteRecognitionPane />} />
+            <Route path="/register" element={<RegisterCard />} />
+            <Route
+              path="/history"
+              element={
+                <History
+                  authenticated={authenticated}
+                  setAuthenticated={setAuthenticated}
+                  setUserID={setUserID}
+                  userID={userID}
+                />
+              }
+            />
+          </Routes>
+        </Router>
+      </Container>
     </ThemeProvider>
   );
 }

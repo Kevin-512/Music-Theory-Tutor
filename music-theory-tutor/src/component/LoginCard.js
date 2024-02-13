@@ -43,8 +43,7 @@ const LoginCard = ({setAuthenticated, setUserID}) => {
       setUserID(token.data.id)
     }else{
       setDisplayMessage("Incorrect or Missing Details")
-    }
-;
+    };
   }
   return (
     <Container component="main" maxWidth="xs">

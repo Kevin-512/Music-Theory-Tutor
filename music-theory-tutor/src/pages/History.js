@@ -1,8 +1,9 @@
-import { Container } from "@mui/material";
+import { Container, Link, Typography } from "@mui/material";
 import React from "react";
 import TitleGrid from "../component/TitleGrid";
+import ResultsTable from "../component/ResultsTable";
 
-const History = () => {
+const History = ({authenticated, userID}) => {
   return (
     <Container maxWidth="md">
       <TitleGrid 
@@ -14,6 +15,13 @@ const History = () => {
         imageText={"main image description"}
         color={"#a268d3"}
       />
+    
+    {authenticated && <ResultsTable userID={userID}/>}
+    
+    {!authenticated && <Typography  variant="h4" component="h2" textAlign="center">
+    <Link href="/profile" color="primary">Login</Link> to view your history
+      </Typography>}
+      
     </Container>
   );
 };

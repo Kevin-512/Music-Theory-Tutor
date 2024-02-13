@@ -33,7 +33,7 @@ const Home = () => {
                   sx={{
                     pt: "56.25%",
                   }}
-                  image="https://source.unsplash.com/random?wallpapers"
+                  image="https://images.pexels.com/photos/5939401/pexels-photo-5939401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -58,7 +58,7 @@ const Home = () => {
                   sx={{
                     pt: "56.25%",
                   }}
-                  image="https://source.unsplash.com/random?wallpapers"
+                  image="https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -83,7 +83,7 @@ const Home = () => {
                   sx={{
                     pt: "56.25%",
                   }}
-                  image="https://source.unsplash.com/random?wallpapers"
+                  image="https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2">

@@ -45,9 +45,11 @@ let db = new sqlite3.Database(source, (err) => {
           // Test Data
           var insert =
             "INSERT INTO results (userID, quizType, keySig, score, time) VALUES (?,?,?,?,?)";
-          db.run(insert, ["1", "Scales", "C", "5"]);
+          db.run(insert, ["1", "Scale", "C", "5"]);
           db.run(insert, ["1", "Notereading", "D", "12", "30"]);
+          db.run(insert, ["1", "Notereading", "E", "3", "10"]);
           db.run(insert, ["2", "Scale", "A", "2"]);
+          db.run(insert, ["4", "Scale", "D", "3"]);
         }
       }
     );

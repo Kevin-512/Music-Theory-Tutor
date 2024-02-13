@@ -92,6 +92,50 @@ app.post("/api/register", (req, res, next) => {
 
 // Add to results
 
+// Get all results
+app.get("/api/results", (req, res, next) => {
+  var sql = "select * from results";
+  var params = [];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    if (rows) {
+        res.json({
+          message: "success",
+          data: rows,
+        });
+      } else {
+        res.json({
+          message: "not_found",
+        });
+      }
+  });
+});
+
+// Get result by ID
+app.get("/api/results/:id", (req, res, next) => {
+  var sql = "select * from results where userID = ?";
+  var params = [req.params.id];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    if (rows) {
+      res.json({
+        message: "success",
+        data: rows,
+      });
+    } else {
+      res.json({
+        message: "not_found",
+      });
+    }
+  });
+});
+
 // User login
 app.post("/api/validate", (req, res) => {
   var errors = [];
