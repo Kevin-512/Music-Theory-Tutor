@@ -66,20 +66,26 @@ const QuizNav = () => {
     <Container maxWidth="md">
       <TitleGrid
         title={"Quizzes"}
-        description={
-          "Choose a note to begin the exercise"
+        description={"Choose a note to begin the exercise"}
+        image={
+          "https://images.pexels.com/photos/5428829/pexels-photo-5428829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         }
-        image={"https://images.pexels.com/photos/5428829/pexels-photo-5428829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
         imageText={"main image description"}
         color={"#36c3c9"}
       />
 
       <Piano
         noteRange={{ first: firstNote, last: lastNote }}
-        playNote={(midiNumber) => {
+        playNote={(midiNumber, volume = 1.0) => {
           var ac = new AudioContext();
           Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
-            piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
+            var note = piano.play(midiNumber, ac.currentTime, {
+              duration: 0.7,
+            });
+            var gainNode = ac.createGain();
+            gainNode.gain.value = 10;
+            note.connect(gainNode);
+            gainNode.connect(ac.destination);
           });
         }}
         stopNote={(midiNumber) => {
@@ -95,9 +101,9 @@ const QuizNav = () => {
 
       <ToggleButtonGroup value={alignment} exclusive onChange={handleChange}>
         <ToggleButton value="major">Major</ToggleButton>
-        <ToggleButton value="minor">Minor</ToggleButton>
+        <ToggleButton value="minor">Natural Minor</ToggleButton>
       </ToggleButtonGroup>
-      <Toolbar/>
+      <Toolbar />
     </Container>
   );
 };

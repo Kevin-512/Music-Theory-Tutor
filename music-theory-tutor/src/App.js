@@ -14,6 +14,7 @@ import { useState } from "react";
 import RegisterCard from "./component/RegisterCard";
 import History from "./pages/History";
 import NoteListening from "./pages/NoteListening";
+import NoteListeningCard from "./component/NoteListeningCard";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -70,6 +71,7 @@ function App() {
               }
             />
             <Route path="/notelistening" element={<NoteListening />} />
+            <Route path="/notelisteningquiz" element={<NoteListeningCard />} />
           </Routes>
         </Router>
       </Container>

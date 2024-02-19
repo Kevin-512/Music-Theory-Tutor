@@ -84,10 +84,16 @@ const NoteRecognition = () => {
 
         <Piano
           noteRange={{ first: firstNote, last: lastNote }}
-          playNote={(midiNumber) => {
+          playNote={(midiNumber, volume = 1.0) => {
             var ac = new AudioContext();
             Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
-              piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
+              var note = piano.play(midiNumber, ac.currentTime, {
+                duration: 0.7,
+              });
+              var gainNode = ac.createGain();
+              gainNode.gain.value = 10;
+              note.connect(gainNode);
+              gainNode.connect(ac.destination);
             });
           }}
           stopNote={(midiNumber) => {
@@ -111,7 +117,7 @@ const NoteRecognition = () => {
             onChange={handleChange}
           >
             <ToggleButton value="major">Major</ToggleButton>
-            <ToggleButton value="minor">Minor</ToggleButton>
+            <ToggleButton value="minor">Natural Minor</ToggleButton>
           </ToggleButtonGroup>
           <FormControl>
             <InputLabel>Time</InputLabel>

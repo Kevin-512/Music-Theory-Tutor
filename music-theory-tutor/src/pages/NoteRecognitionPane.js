@@ -273,7 +273,7 @@ const NoteRecognitionPane = () => {
   if (!continueClicked) {
     return (
       <Container maxWidth="md">
-        <h1>SightReading</h1>
+        <Toolbar/>
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "150px" }}>{scaleName}</h2>
           <Fab color="secondary" variant="extended">
@@ -312,7 +312,13 @@ const NoteRecognitionPane = () => {
           playNote={(midiNumber) => {
             var ac = new AudioContext();
             Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
-              piano.play(midiNumber, ac.currentTime, { duration: 0.7 });
+              var note = piano.play(midiNumber, ac.currentTime, {
+                duration: 0.7,
+              });
+              var gainNode = ac.createGain();
+              gainNode.gain.value = 10;
+              note.connect(gainNode);
+              gainNode.connect(ac.destination);
             });
             handleButtonClick(midiNumber);
           }}
