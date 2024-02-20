@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import QuizCard from "../component/QuizCard";
-import { Container } from "@mui/material";
+import { Container, Toolbar } from "@mui/material";
 
 const Quiz = () => {
   const { state } = useLocation();
@@ -16,7 +16,7 @@ const Quiz = () => {
 
   return (
     <Container maxWidth="md">
-      <h1>Quiz</h1>
+      <Toolbar/>
       <QuizCard quizId={id} quizScale={scale.slice(0,3)} quizTitle={quizTitle}/>
     </Container>
   );
