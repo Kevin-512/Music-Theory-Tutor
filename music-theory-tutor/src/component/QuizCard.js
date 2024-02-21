@@ -221,9 +221,12 @@ const QuizCard = (props) => {
     return (
       <Container>
         <Results
+          authenticated={props.authenticated}
+          userID={props.userID}
           correct={result.correctAnswers}
           wrong={result.wrongAnswers}
           origin={"Quizzes"}
+          keySig={props.keySig}
         />
       </Container>
     );

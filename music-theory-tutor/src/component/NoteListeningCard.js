@@ -5,9 +5,9 @@ import { Scale, note } from "tonal";
 import Soundfont from "soundfont-player";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import { Vex } from "vexflow";
-import PlayCircleFilledTwoToneIcon from '@mui/icons-material/PlayCircleFilledTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import TaskAltTwoToneIcon from '@mui/icons-material/TaskAltTwoTone';
+import PlayCircleFilledTwoToneIcon from "@mui/icons-material/PlayCircleFilledTwoTone";
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import TaskAltTwoToneIcon from "@mui/icons-material/TaskAltTwoTone";
 import Results from "../pages/Results";
 
 const NoteListeningCard = (props) => {
@@ -189,7 +189,7 @@ const NoteListeningCard = (props) => {
     } else {
       setResult(false);
     }
-    setSubmitClicked(true)
+    setSubmitClicked(true);
   }
 
   function clearResult() {
@@ -221,70 +221,87 @@ const NoteListeningCard = (props) => {
     }
   }, [noteSequence]);
 
-  if (!submitClicked){
+  if (!submitClicked) {
     return (
-    <Container maxWidth="md">
-      <Toolbar/>
-      <div style={{ display: "flex", alignItems: "center" }}>
-      <h2 style={{marginRight: "50px", whiteSpace: "nowrap"}}>{scaleName}</h2>
-      <Grid container spacing={2}>
-        <Grid item>
-          <Button variant="contained" onClick={playSequence} startIcon={<PlayCircleFilledTwoToneIcon />}>
-            Play Sequence
-          </Button>
-        </Grid>
+      <Container maxWidth="md">
+        <Toolbar />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h2 style={{ marginRight: "50px", whiteSpace: "nowrap" }}>
+            {scaleName}
+          </h2>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Button
+                variant="contained"
+                onClick={playSequence}
+                startIcon={<PlayCircleFilledTwoToneIcon />}
+              >
+                Play Sequence
+              </Button>
+            </Grid>
 
-        <Grid item>
-          <Button variant="contained" onClick={clearResult} startIcon={<DeleteTwoToneIcon/>}>
-            Clear
-          </Button>
-        </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                onClick={clearResult}
+                startIcon={<DeleteTwoToneIcon />}
+              >
+                Clear
+              </Button>
+            </Grid>
 
-        <Grid item>
-          <Button variant="contained" onClick={checkResult} startIcon={<TaskAltTwoToneIcon/>}>
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
-      </div>
-      <Container>
-        {noteSequence ? (
-          <svg ref={outputRef}></svg>
-        ) : (
-          <div style={{ width: 500, height: 157 }}></div>
-        )}
-      </Container>
-      <Piano
-        noteRange={{ first: firstNote, last: lastNote }}
-        playNote={(midiNumber) => {
-          var ac = new AudioContext();
-          Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
-            var note = piano.play(midiNumber, ac.currentTime, {
-              duration: 0.7,
+            <Grid item>
+              <Button
+                variant="contained"
+                onClick={checkResult}
+                startIcon={<TaskAltTwoToneIcon />}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
+        <Container>
+          {noteSequence ? (
+            <svg ref={outputRef}></svg>
+          ) : (
+            <div style={{ width: 500, height: 157 }}></div>
+          )}
+        </Container>
+        <Piano
+          noteRange={{ first: firstNote, last: lastNote }}
+          playNote={(midiNumber) => {
+            var ac = new AudioContext();
+            Soundfont.instrument(ac, "acoustic_grand_piano").then((piano) => {
+              var note = piano.play(midiNumber, ac.currentTime, {
+                duration: 0.7,
+              });
+              var gainNode = ac.createGain();
+              gainNode.gain.value = 10;
+              note.connect(gainNode);
+              gainNode.connect(ac.destination);
             });
-            var gainNode = ac.createGain();
-            gainNode.gain.value = 10;
-            note.connect(gainNode);
-            gainNode.connect(ac.destination);
-          });
-          handlePianoPlay(midiNumber);
-        }}
-        stopNote={() => {}}
-        width={1000}
-        keyboardShortcuts={keyboardShortcuts}
+            handlePianoPlay(midiNumber);
+          }}
+          stopNote={() => {}}
+          width={1000}
+          keyboardShortcuts={keyboardShortcuts}
+        />
+      </Container>
+    );
+  } else {
+    return (
+      <Results
+        authenticated={props.authenticated}
+        userID={props.userID}
+        correct={notesDisplayed}
+        correctNoOctave={notesDisplayedNoOctave}
+        answer={noteSequence}
+        origin={"NoteListening"}
+        keySig={midiToNote(id)}
       />
-    </Container>
-  );
-  }else{
-    return(<Results
-    authenticated={props.authenticated} 
-    userID={props.userID}
-    correct={notesDisplayed}
-    correctNoOctave={notesDisplayedNoOctave}
-    answer={noteSequence}
-    origin={"NoteListening"}/>)
+    );
   }
-  
 };
 
 export default NoteListeningCard;

@@ -331,13 +331,18 @@ const NoteRecognitionPane = (props) => {
     );
   } else {
     return (
-      <Results
+      <Container maxWidth="md">
+        <Results
         authenticated={props.authenticated}
         userID={props.userID}
         correct={result.correctAnswers}
         wrong={result.wrongAnswers}
         origin={"SightReading"}
+        keySig={midiToNote(id)}
+        time={limit}
       />
+      </Container>
+      
     );
   }
 };
