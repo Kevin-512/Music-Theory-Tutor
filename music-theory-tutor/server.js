@@ -90,7 +90,30 @@ app.post("/api/register", (req, res, next) => {
   });
 });
 
-// Add to results
+// Add to results///////////////////////////////
+app.post("/api/record/results", (req, res, next) => {
+  var data = {
+    userID: req.body.userID,
+    quizType: req.body.quizType,
+    keySig: req.body.keySig,
+    score: req.body.score,
+    time: req.body.time,
+  };
+  var sql = "INSERT INTO results (userID, quizType, keySig, score, time) VALUES (?,?,?,?,?)";
+  var params = [data.userID, data.quizType, data.keySig, data.score, data.time];
+  db.run(sql, params, function (err, result) {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: data,
+      id: this.lastID,
+    });
+  });
+});
+////////////////////////////////////////////////////////////////////
 
 // Get all results
 app.get("/api/results", (req, res, next) => {

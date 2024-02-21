@@ -10,7 +10,7 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import TaskAltTwoToneIcon from '@mui/icons-material/TaskAltTwoTone';
 import Results from "../pages/Results";
 
-const NoteListeningCard = () => {
+const NoteListeningCard = (props) => {
   const { state } = useLocation();
   const { id, scale } = state;
   const firstNote = MidiNumbers.fromNote("c4");
@@ -277,6 +277,8 @@ const NoteListeningCard = () => {
   );
   }else{
     return(<Results
+    authenticated={props.authenticated} 
+    userID={props.userID}
     correct={notesDisplayed}
     correctNoOctave={notesDisplayedNoOctave}
     answer={noteSequence}

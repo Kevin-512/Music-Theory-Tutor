@@ -56,6 +56,7 @@ const Results = (props) => {
         <h3>{"Mistakes: " + props.wrong}</h3>
         <h3>{"Accuracy: " + (accuracy * 100).toFixed(3) + "%"}</h3>
         <h3>{"Total Answered: " + total}</h3>
+        <h3>{props.userID}</h3>
         <Button onClick={onClick} variant="contained">
           Return
         </Button>

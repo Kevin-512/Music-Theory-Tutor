@@ -57,7 +57,7 @@ function App() {
             />
             <Route path="/settings" element={<Settings />} />
             <Route path="/quiz" element={<Quiz />} />
-            <Route path="/sightreadingquiz" element={<NoteRecognitionPane />} />
+            <Route path="/sightreadingquiz" element={<NoteRecognitionPane authenticated={authenticated} userID={userID}/>} />
             <Route path="/register" element={<RegisterCard />} />
             <Route
               path="/history"
@@ -71,7 +71,7 @@ function App() {
               }
             />
             <Route path="/notelistening" element={<NoteListening />} />
-            <Route path="/notelisteningquiz" element={<NoteListeningCard />} />
+            <Route path="/notelisteningquiz" element={<NoteListeningCard authenticated={authenticated} userID={userID}/>} />
           </Routes>
         </Router>
       </Container>

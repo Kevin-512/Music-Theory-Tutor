@@ -12,7 +12,7 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import Results from "./Results";
 
-const NoteRecognitionPane = () => {
+const NoteRecognitionPane = (props) => {
   const firstNote = MidiNumbers.fromNote("a4");
   const lastNote = MidiNumbers.fromNote("c6");
   const { state } = useLocation();
@@ -68,7 +68,7 @@ const NoteRecognitionPane = () => {
       B: 11,
     };
 
-    return note_dict[note]
+    return note_dict[note];
   }
 
   const keyboardShortcuts = KeyboardShortcuts.create({
@@ -273,7 +273,7 @@ const NoteRecognitionPane = () => {
   if (!continueClicked) {
     return (
       <Container maxWidth="md">
-        <Toolbar/>
+        <Toolbar />
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "150px" }}>{scaleName}</h2>
           <Fab color="secondary" variant="extended">
@@ -322,18 +322,18 @@ const NoteRecognitionPane = () => {
             });
             handleButtonClick(midiNumber);
           }}
-          stopNote={(midiNumber) => {
-            
-          }}
+          stopNote={(midiNumber) => {}}
           width={1000}
           keyboardShortcuts={keyboardShortcuts}
         />
-        <Toolbar/>
+        <Toolbar />
       </Container>
     );
   } else {
     return (
       <Results
+        authenticated={props.authenticated}
+        userID={props.userID}
         correct={result.correctAnswers}
         wrong={result.wrongAnswers}
         origin={"SightReading"}
