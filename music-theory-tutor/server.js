@@ -20,15 +20,15 @@ app.get("/api/users", (req, res, next) => {
       return;
     }
     if (rows) {
-        res.json({
-          message: "success",
-          data: rows,
-        });
-      } else {
-        res.json({
-          message: "not_found",
-        });
-      }
+      res.json({
+        message: "success",
+        data: rows,
+      });
+    } else {
+      res.json({
+        message: "not_found",
+      });
+    }
   });
 });
 
@@ -82,10 +82,19 @@ app.post("/api/register", (req, res, next) => {
       res.status(400).json({ error: err.message });
       return;
     }
-    res.json({
-      message: "success",
-      data: data,
-      id: this.lastID,
+    var settingsSql =
+      "INSERT INTO settings (email, color, textsize) VALUES (?,?,?)";
+    var settingsParams = [data.email, "#883bc4", 14];
+    db.run(settingsSql, settingsParams, function (err, result) {
+      if (err) {
+        res.status(400).json({ error: err.message });
+        return;
+      }
+      res.json({
+        message: "success",
+        data: data,
+        id: this.lastID,
+      });
     });
   });
 });
@@ -99,7 +108,8 @@ app.post("/api/record/results", (req, res, next) => {
     score: req.body.score,
     time: req.body.time,
   };
-  var sql = "INSERT INTO results (userID, quizType, keySig, score, time) VALUES (?,?,?,?,?)";
+  var sql =
+    "INSERT INTO results (userID, quizType, keySig, score, time) VALUES (?,?,?,?,?)";
   var params = [data.userID, data.quizType, data.keySig, data.score, data.time];
   db.run(sql, params, function (err, result) {
     if (err) {
@@ -125,15 +135,15 @@ app.get("/api/results", (req, res, next) => {
       return;
     }
     if (rows) {
-        res.json({
-          message: "success",
-          data: rows,
-        });
-      } else {
-        res.json({
-          message: "not_found",
-        });
-      }
+      res.json({
+        message: "success",
+        data: rows,
+      });
+    } else {
+      res.json({
+        message: "not_found",
+      });
+    }
   });
 });
 
@@ -184,10 +194,31 @@ app.post("/api/validate", (req, res) => {
       return;
     }
     if (row) {
-      res.json({ validation: true,
-    data:row });
+      res.json({ validation: true, data: row });
     } else {
       res.json({ validation: false });
+    }
+  });
+});
+
+// Get settings by email
+app.get("/api/settings/:email", (req, res, next) => {
+  var sql = "select * from settings where email = ?";
+  var params = [req.params.email];
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    if (rows) {
+      res.json({
+        message: "success",
+        data: rows,
+      });
+    } else {
+      res.json({
+        message: "not_found",
+      });
     }
   });
 });

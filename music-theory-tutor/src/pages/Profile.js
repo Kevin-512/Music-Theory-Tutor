@@ -1,9 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoginCard from "../component/LoginCard";
-import { Container, Typography } from "@mui/material";
+import { Container, Toolbar, Typography } from "@mui/material";
 import TitleGrid from "../component/TitleGrid";
+import axios from "axios";
 
-const Profile = ({ authenticated, setAuthenticated, setUserID, setUserName, userName }) => {
+const Profile = ({
+  authenticated,
+  setAuthenticated,
+  setUserID,
+  setUserName,
+  userName,
+  setLoggedEmail,
+  loggedEmail,
+  setColor
+}) => {
+
+  useEffect(() => {
+    console.log(
+      "useEffect triggered. Authenticated:",
+      authenticated,
+      "Logged Email:",
+      loggedEmail
+    );
+    if (authenticated && loggedEmail) {
+      fetchSettings(loggedEmail);
+    }
+  }, [authenticated, loggedEmail]);
+
+  const fetchSettings = (email) => {
+    axios
+      .get(`http://localhost:8000/api/settings/${email}`)
+      .then((response) => {
+        const data = response.data;
+        if (data.message === "success") {
+          setColor(data.data[0].color);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching settings:", error);
+      });
+  };
+
   return (
     <Container maxWidth="md">
       <TitleGrid
@@ -15,10 +52,25 @@ const Profile = ({ authenticated, setAuthenticated, setUserID, setUserName, user
         color={"#dfc920"}
       />
       {!authenticated && (
-        <LoginCard setAuthenticated={setAuthenticated} setUserID={setUserID} setUserName={setUserName} />
+        <LoginCard
+          setAuthenticated={setAuthenticated}
+          setUserID={setUserID}
+          setUserName={setUserName}
+          setLoggedEmail={setLoggedEmail}
+        />
       )}
 
-      {authenticated && <Typography variant="h3" textAlign="center">{"Welcome back " + userName}</Typography>}
+      {authenticated && (
+        <Typography variant="h3" textAlign="center">
+          {"Welcome back " + userName}
+        </Typography>
+      )}
+      <Toolbar />
+      {authenticated && (
+        <Typography variant="h4" textAlign="center">
+          {"Email: " + loggedEmail}
+        </Typography>
+      )}
     </Container>
   );
 };

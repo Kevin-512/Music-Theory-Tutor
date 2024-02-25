@@ -20,15 +20,17 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [userID, setUserID] = useState(0);
   const [userName, setUserName] = useState("");
+  const [loggedEmail, setLoggedEmail] = useState("");
+  const [color, setColor] = useState("");
   const theme = createTheme({
     palette: {
       primary: {
         main: "#883bc4",
       },
-      background: {
-        default: "#fffbf2",
-      },
     },
+    typography:{
+      fontSize:14,
+    }
   });
 
   return (
@@ -52,6 +54,9 @@ function App() {
                   setUserID={setUserID}
                   setUserName={setUserName}
                   userName={userName}
+                  setLoggedEmail={setLoggedEmail}
+                  loggedEmail={loggedEmail}
+                  setColor={setColor}
                 />
               }
             />

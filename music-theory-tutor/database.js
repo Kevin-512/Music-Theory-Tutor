@@ -27,6 +27,8 @@ let db = new sqlite3.Database(source, (err) => {
             "INSERT INTO user (name, email, password) VALUES (?,?,?)";
           db.run(insert, ["admin", "admin@example.com", md5("admintest")]);
           db.run(insert, ["user", "user@example.com", md5("usertest")]);
+          db.run(insert, ["student", "student@example.com", md5("studenttest")]);
+          db.run(insert, ["test", "test@example.com", md5("test123")]);
         }
       }
     );
@@ -54,6 +56,26 @@ let db = new sqlite3.Database(source, (err) => {
           db.run(insert, ["3", "Notereading", "C", "2", "20"]);
           db.run(insert, ["4", "Quiz", "D", "3"]);
           db.run(insert, ["4", "Notelistening", "A", "70"]);
+        }
+      }
+    );
+    db.run(
+      `CREATE TABLE settings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email text UNIQUE, 
+            color text,
+            textsize interger
+            )`,
+      (err) => {
+        if (err) {
+        } else {
+          // Test Data
+          var insert =
+            "INSERT INTO settings (email, color, textsize) VALUES (?,?,?)";
+          db.run(insert, ["admin@example.com", "#883bc4", 14]);
+          db.run(insert, ["user@example.com", "#883bc4", 14]);
+          db.run(insert, ["student@example.com", "#883bc4", 14]);
+          db.run(insert, ["test@example.com", "#883bc4", 14]);
         }
       }
     );
