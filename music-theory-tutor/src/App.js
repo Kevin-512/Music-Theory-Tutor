@@ -21,16 +21,16 @@ function App() {
   const [userID, setUserID] = useState(0);
   const [userName, setUserName] = useState("");
   const [loggedEmail, setLoggedEmail] = useState("");
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("#883bc4");
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#883bc4",
+        main: color,
       },
     },
-    typography:{
-      fontSize:14,
-    }
+    typography: {
+      fontSize: 14,
+    },
   });
 
   return (
@@ -60,7 +60,19 @@ function App() {
                 />
               }
             />
-            <Route path="/settings" element={<Settings />} />
+            <Route
+              path="/settings"
+              element={
+                <Settings
+                  authenticated={authenticated}
+                  setAuthenticated={setAuthenticated}
+                  setUserID={setUserID}
+                  setColor={setColor}
+                  loggedEmail={loggedEmail}
+                  userID={userID}
+                />
+              }
+            />
             <Route path="/quiz" element={<Quiz userID={userID} />} />
             <Route
               path="/sightreadingquiz"

@@ -223,6 +223,29 @@ app.get("/api/settings/:email", (req, res, next) => {
   });
 });
 
+// Update Colour Theme
+app.patch("/api/update/theme/:email", (req, res, next) => {
+  var data = {
+      color: req.body.color
+  }
+  db.run(
+      `UPDATE settings set 
+         color = COALESCE(?,color)
+         WHERE email = ?`,
+      [data.color, req.params.email],
+      function (err, result) {
+          if (err){
+              res.status(400).json({"error": res.message})
+              return;
+          }
+          res.json({
+              message: "success",
+              data: data,
+              changes: this.changes
+          })
+  });
+})
+
 app.listen(HTTP_PORT, () =>
   console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT))
 );
