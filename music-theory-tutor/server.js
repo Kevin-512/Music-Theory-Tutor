@@ -246,6 +246,29 @@ app.patch("/api/update/theme/:email", (req, res, next) => {
   });
 })
 
+// Update Font
+app.patch("/api/update/font/:email", (req, res, next) => {
+  var data = {
+      textsize: req.body.textsize
+  }
+  db.run(
+      `UPDATE settings set 
+         textsize = COALESCE(?,textsize)
+         WHERE email = ?`,
+      [data.textsize, req.params.email],
+      function (err, result) {
+          if (err){
+              res.status(400).json({"error": res.message})
+              return;
+          }
+          res.json({
+              message: "success",
+              data: data,
+              changes: this.changes
+          })
+  });
+})
+
 app.listen(HTTP_PORT, () =>
   console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT))
 );

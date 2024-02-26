@@ -10,6 +10,9 @@ const Settings = ({
   userID,
   setColor,
   loggedEmail,
+  color,
+  fontSize,
+  setFontSize,
 }) => {
   return (
     <Container maxWidth="md">
@@ -23,7 +26,7 @@ const Settings = ({
       />
 
       {authenticated && (
-        <Customiser setColor={setColor} loggedEmail={loggedEmail} />
+        <Customiser setColor={setColor} loggedEmail={loggedEmail} color={color} fontSize={fontSize} setFontSize={setFontSize} />
       )}
 
       {!authenticated && (

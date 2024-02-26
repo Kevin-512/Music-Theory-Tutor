@@ -12,7 +12,9 @@ const Profile = ({
   userName,
   setLoggedEmail,
   loggedEmail,
-  setColor
+  setColor,
+  setFontSize,
+  userID,
 }) => {
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const Profile = ({
         const data = response.data;
         if (data.message === "success") {
           setColor(data.data[0].color);
+          setFontSize(data.data[0].textsize)
         }
       })
       .catch((error) => {
@@ -67,9 +70,14 @@ const Profile = ({
       )}
       <Toolbar />
       {authenticated && (
+        <Container>
         <Typography variant="h4" textAlign="center">
           {"Email: " + loggedEmail}
         </Typography>
+        <Typography variant="h4" textAlign="center">
+        {"ID: " + userID}
+      </Typography>
+      </Container>
       )}
     </Container>
   );

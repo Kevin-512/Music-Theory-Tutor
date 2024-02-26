@@ -22,6 +22,7 @@ function App() {
   const [userName, setUserName] = useState("");
   const [loggedEmail, setLoggedEmail] = useState("");
   const [color, setColor] = useState("#883bc4");
+  const [fontSize, setFontSize] = useState(14);
   const theme = createTheme({
     palette: {
       primary: {
@@ -29,7 +30,7 @@ function App() {
       },
     },
     typography: {
-      fontSize: 14,
+      fontSize: fontSize,
     },
   });
 
@@ -57,6 +58,8 @@ function App() {
                   setLoggedEmail={setLoggedEmail}
                   loggedEmail={loggedEmail}
                   setColor={setColor}
+                  setFontSize={setFontSize}
+                  userID={userID}
                 />
               }
             />
@@ -70,6 +73,9 @@ function App() {
                   setColor={setColor}
                   loggedEmail={loggedEmail}
                   userID={userID}
+                  color={color}
+                  fontSize={fontSize}
+                  setFontSize={setFontSize}
                 />
               }
             />
