@@ -66,7 +66,7 @@ const Sidebar = () => {
                   <ListItemIcon>
                     <AudiotrackIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Note Recall" />
+                  <ListItemText primary="Note Reading" />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
@@ -81,6 +81,18 @@ const Sidebar = () => {
                   <ListItemText primary="Note Listening" />
                 </ListItemButton>
               </ListItem>
+              {/* <ListItem disablePadding>
+                <ListItemButton
+                  component={Link}
+                  to="/recognitionselect"
+                  value="/recognitionselect"
+                >
+                  <ListItemIcon>
+                  <AudiotrackIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Note Recognition" />
+                </ListItemButton>
+              </ListItem> */}
             </List>
           </Box>
         </Drawer>

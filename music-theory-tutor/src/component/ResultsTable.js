@@ -20,7 +20,7 @@ const ResultsTable = ({ userID }) => {
       .catch((error) => {
         console.error("Error fetching results:", error);
       });
-  }, []);
+  }, [userID]);
 
   return (
     <Table size="small">

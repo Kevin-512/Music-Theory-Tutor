@@ -15,6 +15,7 @@ import RegisterCard from "./component/RegisterCard";
 import History from "./pages/History";
 import NoteListening from "./pages/NoteListening";
 import NoteListeningCard from "./component/NoteListeningCard";
+import NoteRecognitionSplit from "./pages/NoteRecognitionSplit";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -116,6 +117,7 @@ function App() {
                 />
               }
             />
+            <Route path="/recognitionselect" element={<NoteRecognitionSplit />} />
           </Routes>
         </Router>
       </Container>

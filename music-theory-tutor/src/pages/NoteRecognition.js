@@ -73,7 +73,7 @@ const NoteRecognition = () => {
   return (
     <Container maxWidth="md">
       <TitleGrid
-        title={"Note Recall"}
+        title={"Note Reading"}
         description={
           "Choose a note to begin the exercise"
         }
