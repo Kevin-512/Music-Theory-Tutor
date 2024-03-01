@@ -133,6 +133,7 @@ const Customiser = ({
             <MenuItem value={16}>16</MenuItem>
             <MenuItem value={18}>18</MenuItem>
             <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={20}>24</MenuItem>
           </Select>
         </FormControl>
         <Grid container spacing={2} justifyContent="flex-end">

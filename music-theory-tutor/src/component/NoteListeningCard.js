@@ -8,6 +8,7 @@ import { Vex } from "vexflow";
 import PlayCircleFilledTwoToneIcon from "@mui/icons-material/PlayCircleFilledTwoTone";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import TaskAltTwoToneIcon from "@mui/icons-material/TaskAltTwoTone";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import Results from "../pages/Results";
 
 const NoteListeningCard = (props) => {
@@ -196,6 +197,14 @@ const NoteListeningCard = (props) => {
     setNoteSequence("");
   }
 
+  function clearOne() {
+    if (noteSequence !== "") {
+      let lastComma = noteSequence.lastIndexOf(",");
+      let newSequence = noteSequence.substring(0, lastComma);
+      setNoteSequence(newSequence);
+    }
+  }
+
   const { Factory } = Vex.Flow;
   const outputRef = useRef(null);
   useEffect(() => {
@@ -247,6 +256,16 @@ const NoteListeningCard = (props) => {
                 startIcon={<DeleteTwoToneIcon />}
               >
                 Clear
+              </Button>
+            </Grid>
+
+            <Grid item>
+              <Button
+                variant="contained"
+                onClick={clearOne}
+                startIcon={<ArrowBackRoundedIcon />}
+              >
+                Clear One
               </Button>
             </Grid>
 
