@@ -64,18 +64,19 @@ let db = new sqlite3.Database(source, (err) => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email text UNIQUE, 
             color text,
-            textsize interger
+            textsize integer,
+            mode text
             )`,
       (err) => {
         if (err) {
         } else {
           // Test Data
           var insert =
-            "INSERT INTO settings (email, color, textsize) VALUES (?,?,?)";
-          db.run(insert, ["admin@example.com", "#883bc4", 14]);
-          db.run(insert, ["user@example.com", "#883bc4", 14]);
-          db.run(insert, ["student@example.com", "#883bc4", 14]);
-          db.run(insert, ["test@example.com", "#883bc4", 14]);
+            "INSERT INTO settings (email, color, textsize, mode) VALUES (?,?,?,?)";
+          db.run(insert, ["admin@example.com", "#883bc4", 14, "light"]);
+          db.run(insert, ["user@example.com", "#883bc4", 14, "light"]);
+          db.run(insert, ["student@example.com", "#883bc4", 14, "light"]);
+          db.run(insert, ["test@example.com", "#883bc4", 14, "light"]);
         }
       }
     );

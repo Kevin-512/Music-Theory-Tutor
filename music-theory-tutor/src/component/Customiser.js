@@ -3,14 +3,16 @@ import {
   ButtonGroup,
   Container,
   FormControl,
+  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
   Select,
+  Switch,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { MuiColorInput } from "mui-color-input";
 import axios from "axios";
 
@@ -20,8 +22,11 @@ const Customiser = ({
   loggedEmail,
   fontSize,
   setFontSize,
+  setWebTheme,
+  webTheme
 }) => {
-  const [value, setValue] = React.useState(color);
+  const [value, setValue] = useState(color);
+  const [themeDark, setThemeDark] = useState(false);
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -70,10 +75,49 @@ const Customiser = ({
   };
 
   const defaultFont = () => {
-    setFontSize(14)
+    setFontSize(14);
     axios
       .patch(`http://localhost:8000/api/update/font/${loggedEmail}`, {
         textsize: 14,
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const updateTheme = (event) => {
+    setThemeDark(event.target.checked);
+    if (themeDark === false){
+      setWebTheme("dark")
+    }else{
+      setWebTheme("light")
+    }
+  };
+
+  const saveTheme = () => {
+    console.log(webTheme)
+    axios
+      .patch(`http://localhost:8000/api/update/mode/${loggedEmail}`, {
+        mode: webTheme,
+        textsize: 15,
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const defaultTheme = () => {
+    setThemeDark(false);
+    setWebTheme("light");
+    axios
+      .patch(`http://localhost:8000/api/update/mode/${loggedEmail}`, {
+        mode: "light",
       })
       .then((response) => {
         console.log("Response:", response.data);
@@ -144,6 +188,36 @@ const Customiser = ({
           </Grid>
           <Grid item>
             <Button variant="contained" onClick={defaultFont}>
+              Default
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+      <Toolbar />
+      <Container
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography marginRight={1} whiteSpace={"nowrap"}>
+          Dark Mode
+        </Typography>
+        <Switch
+          checked={themeDark}
+          onChange={updateTheme}
+          inputProps={{ "aria-label": "controlled" }}
+        />
+
+        <Grid container spacing={2} justifyContent="flex-end">
+          <Grid item>
+            <Button variant="contained" onClick={saveTheme}>
+              Save
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" onClick={defaultTheme}>
               Default
             </Button>
           </Grid>

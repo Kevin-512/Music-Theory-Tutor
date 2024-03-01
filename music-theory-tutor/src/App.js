@@ -23,11 +23,13 @@ function App() {
   const [loggedEmail, setLoggedEmail] = useState("");
   const [color, setColor] = useState("#883bc4");
   const [fontSize, setFontSize] = useState(14);
+  const [webTheme, setWebTheme] = useState("light");
   const theme = createTheme({
     palette: {
       primary: {
         main: color,
       },
+      mode: webTheme
     },
     typography: {
       fontSize: fontSize,
@@ -60,6 +62,7 @@ function App() {
                   setColor={setColor}
                   setFontSize={setFontSize}
                   userID={userID}
+                  setWebTheme={setWebTheme}
                 />
               }
             />
@@ -76,6 +79,8 @@ function App() {
                   color={color}
                   fontSize={fontSize}
                   setFontSize={setFontSize}
+                  setWebTheme={setWebTheme}
+                  webTheme={webTheme}
                 />
               }
             />

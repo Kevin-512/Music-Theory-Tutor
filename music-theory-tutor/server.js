@@ -269,6 +269,29 @@ app.patch("/api/update/font/:email", (req, res, next) => {
   });
 })
 
+// Update Mode
+app.patch("/api/update/mode/:email", (req, res, next) => {
+  var data = {
+      mode: req.body.mode,
+  }
+  db.run(
+      `UPDATE settings set 
+         mode = COALESCE(?,mode)
+         WHERE email = ?`,
+      [data.mode, req.params.email],
+      function (err, result) {
+          if (err){
+              res.status(400).json({"error": res.message})
+              return;
+          }
+          res.json({
+              message: "success",
+              data: data,
+              changes: this.changes
+          })
+  });
+})
+
 app.listen(HTTP_PORT, () =>
   console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT))
 );

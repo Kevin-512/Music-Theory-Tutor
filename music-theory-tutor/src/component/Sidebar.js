@@ -15,7 +15,6 @@ import {
 import SchoolIcon from "@mui/icons-material/School";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
-import FactCheckIcon from '@mui/icons-material/FactCheck';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 
 const drawerWidth = 240;
@@ -80,18 +79,6 @@ const Sidebar = () => {
                     <HeadphonesIcon />
                   </ListItemIcon>
                   <ListItemText primary="Note Listening" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton
-                  component={Link}
-                  to="/history"
-                  value="/history"
-                >
-                  <ListItemIcon>
-                    <FactCheckIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="History" />
                 </ListItemButton>
               </ListItem>
             </List>

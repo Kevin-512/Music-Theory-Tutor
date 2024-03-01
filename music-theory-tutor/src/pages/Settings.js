@@ -13,6 +13,8 @@ const Settings = ({
   color,
   fontSize,
   setFontSize,
+  setWebTheme,
+  webTheme
 }) => {
   return (
     <Container maxWidth="md">
@@ -26,7 +28,7 @@ const Settings = ({
       />
 
       {authenticated && (
-        <Customiser setColor={setColor} loggedEmail={loggedEmail} color={color} fontSize={fontSize} setFontSize={setFontSize} />
+        <Customiser setColor={setColor} loggedEmail={loggedEmail} color={color} fontSize={fontSize} setFontSize={setFontSize} setWebTheme={setWebTheme} webTheme={webTheme} />
       )}
 
       {!authenticated && (
