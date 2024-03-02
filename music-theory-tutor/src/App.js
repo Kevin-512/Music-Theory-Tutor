@@ -30,7 +30,7 @@ function App() {
       primary: {
         main: color,
       },
-      mode: webTheme
+      mode: webTheme,
     },
     typography: {
       fontSize: fontSize,
@@ -117,7 +117,10 @@ function App() {
                 />
               }
             />
-            <Route path="/recognitionselect" element={<NoteRecognitionSplit />} />
+            <Route
+              path="/recognitionselect"
+              element={<NoteRecognitionSplit />}
+            />
           </Routes>
         </Router>
       </Container>

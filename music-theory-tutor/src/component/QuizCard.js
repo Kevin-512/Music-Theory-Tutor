@@ -20,7 +20,6 @@ import Results from "../pages/Results";
 
 const QuizCard = (props) => {
   // Called when the next button is pressed
-
   const onClickSubmit = (props) => {
     if (selectedAnswerIndex != null) {
       setQuestionSubmitted(true);

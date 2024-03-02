@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Fab from '@mui/material/Fab';
+import Fab from "@mui/material/Fab";
 
-const Timer = ({timeLeft = 30}) => {
+const Timer = ({ timeLeft = 30 }) => {
   const [seconds, setSeconds] = useState(timeLeft);
   const [isActive, setIsActive] = useState(true);
 
+  // Counts down in seconds from the value originally entered as a parameter
   useEffect(() => {
     let interval = null;
-
     if (isActive && seconds === 0) {
       setIsActive(false);
     } else if (isActive) {
@@ -20,12 +20,9 @@ const Timer = ({timeLeft = 30}) => {
   }, [isActive, seconds]);
 
   return (
-    
-      <Fab color="secondary" variant="extended">
-        {seconds}
-      </Fab>
-    
-    
+    <Fab color="secondary" variant="extended">
+      {seconds}
+    </Fab>
   );
 };
 

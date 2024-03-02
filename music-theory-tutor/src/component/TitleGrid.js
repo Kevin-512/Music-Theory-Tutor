@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Component for displaying a title banner which can be imported for each page
 const TitleGrid = (props) => {
   return (
     <Container
@@ -16,6 +17,7 @@ const TitleGrid = (props) => {
         backgroundImage: `url(${props.image})`,
       }}
     >
+      {/* Code for displaying an image */}
       {
         <img
           style={{ display: "none" }}
@@ -42,6 +44,7 @@ const TitleGrid = (props) => {
               pr: { md: 0 },
             }}
           >
+            {/* Properties for displaying a title and a description of the page */}
             <Typography
               component="h1"
               variant="h3"

@@ -5,7 +5,7 @@ import { Container, Toolbar } from "@mui/material";
 
 const Quiz = (props) => {
   const { state } = useLocation();
-  const { id, scale} = state;
+  const { id, scale } = state;
   let quizTitle =
     midiToNote(id) + " " + scale.charAt(0).toUpperCase() + scale.slice(1);
 
@@ -28,6 +28,7 @@ const Quiz = (props) => {
     return notes[noteIndex - 1];
   }
 
+  // Displays the quiz depending on what note what chosen
   return (
     <Container maxWidth="md">
       <Toolbar />

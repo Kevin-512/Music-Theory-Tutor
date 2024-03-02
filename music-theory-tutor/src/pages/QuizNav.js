@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import TitleGrid from "../component/TitleGrid";
 
+// Displays a piano which can be used to navigate between different quizzes depending on the note chosen by the user
+
 const QuizNav = () => {
   const [alignment, setAlignment] = React.useState("major");
   const navigate = useNavigate();
@@ -64,6 +66,7 @@ const QuizNav = () => {
 
   return (
     <Container maxWidth="md">
+      {/* Display Banner */}
       <TitleGrid
         title={"Quizzes"}
         description={"Choose a note to begin the exercise"}
@@ -74,6 +77,7 @@ const QuizNav = () => {
         color={"#36c3c9"}
       />
 
+      {/* Display Piano for user to navigate */}
       <Piano
         noteRange={{ first: firstNote, last: lastNote }}
         playNote={(midiNumber, volume = 1.0) => {
@@ -99,6 +103,7 @@ const QuizNav = () => {
 
       <Toolbar />
 
+      {/* Buttons for the user to choose if the quiz is given in the major or minor chord */}
       <ToggleButtonGroup value={alignment} exclusive onChange={handleChange}>
         <ToggleButton value="major">Major</ToggleButton>
         <ToggleButton value="minor">Natural Minor</ToggleButton>

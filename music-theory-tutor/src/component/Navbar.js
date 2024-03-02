@@ -12,12 +12,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
 
+// Creating the bar at the top of the page which contains icons for accessing profile detail, settings and the title which can be pressed to go back to the home page
+
 const Navbar = () => {
   return (
     <AppBar
       position="fixed"
       // Colour to place in sx in line below bgcolor: "#993ac5",
-      sx={{  zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
       <Container maxWidth="md">
         <Toolbar>

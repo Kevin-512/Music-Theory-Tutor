@@ -15,40 +15,48 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-const LoginCard = ({setAuthenticated, setUserID, setUserName, setLoggedEmail}) => {
+const LoginCard = ({
+  setAuthenticated,
+  setUserID,
+  setUserName,
+  setLoggedEmail,
+}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [displayMessage, setDisplayMessage] = useState();
-  
-  async function loginUser(credentials) {
-    return fetch('http://localhost:8000/api/validate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(data => data.json())
-   }
 
-  const handleSubmit = async e => {
+  // Function for fetching a user's login details when they've been entered
+  async function loginUser(credentials) {
+    return fetch("http://localhost:8000/api/validate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    }).then((data) => data.json());
+  }
+
+  // Carries out authentication when the login button is pressed
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await loginUser({
       email,
-      password
+      password,
     });
-    console.log(token)
-    if (token.validation){
-      setAuthenticated(true)
-      setUserID(token.data.id)
-      setUserName(token.data.name)
-      setLoggedEmail(token.data.email)
-    }else{
-      setDisplayMessage("Incorrect or Missing Details")
-    };
-  }
+    console.log(token);
+    if (token.validation) {
+      setAuthenticated(true);
+      setUserID(token.data.id);
+      setUserName(token.data.name);
+      setLoggedEmail(token.data.email);
+    } else {
+      setDisplayMessage("Incorrect or Missing Details");
+    }
+  };
   return (
     <Container component="main" maxWidth="xs">
+      {/* Creates a form for the user to fill out email and password to login */}
+      {/* Contains links to create an account. Also has a link for forgotten password but is future work due to inability to access email accounts */}
       <Box
         sx={{
           marginTop: 8,
@@ -73,7 +81,7 @@ const LoginCard = ({setAuthenticated, setUserID, setUserName, setLoggedEmail}) =
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -84,14 +92,21 @@ const LoginCard = ({setAuthenticated, setUserID, setUserName, setLoggedEmail}) =
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Box>
-        <Typography style={{ color: 'red' }} variant="body2" color="text.secondary" align="right">{displayMessage}</Typography>
+            <Typography
+              style={{ color: "red" }}
+              variant="body2"
+              color="text.secondary"
+              align="right"
+            >
+              {displayMessage}
+            </Typography>
           </Box>
           <Button
             type="submit"
@@ -101,7 +116,7 @@ const LoginCard = ({setAuthenticated, setUserID, setUserName, setLoggedEmail}) =
           >
             Sign In
           </Button>
-          
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

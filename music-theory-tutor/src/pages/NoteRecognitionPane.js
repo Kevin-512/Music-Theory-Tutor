@@ -47,6 +47,7 @@ const NoteRecognitionPane = (props) => {
     }
   }
 
+  // Converts a midinumber to a single note, adds sharp/flat if needed
   function noteToMidi(note) {
     let note_dict = {
       C: 0,
@@ -71,6 +72,7 @@ const NoteRecognitionPane = (props) => {
     return note_dict[note];
   }
 
+  // Labels for individual keys on the visual keyboard
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
@@ -118,6 +120,7 @@ const NoteRecognitionPane = (props) => {
     ],
   });
 
+  // Gets the keySignature of a note entered as a parameter
   function getKeySignature(input) {
     const parts = input.toLowerCase().split(" ");
     const note = parts[0];
@@ -154,6 +157,7 @@ const NoteRecognitionPane = (props) => {
     }
   }
 
+  // Generates the random notes to be displayed upon loading a quiz
   function generateNoteSet(numberOfNotes = 8) {
     // Generate random notes
     let randomNotes = "";
@@ -180,6 +184,7 @@ const NoteRecognitionPane = (props) => {
     return [randomNotes, randomNotesNoNumber];
   }
 
+  // If a note is pressed, compares it with the first note being displayed and removes it if it matches, otherwise does nothing
   function checkNote(notePressed) {
     const firstComma = notesDisplayedNoOctave.indexOf(",");
     const nextNote =
@@ -208,6 +213,8 @@ const NoteRecognitionPane = (props) => {
       }));
     }
   }
+
+  // Shows the results when the user has finished the quiz
   function displayResults() {
     setContinueClicked(true);
   }
@@ -216,6 +223,7 @@ const NoteRecognitionPane = (props) => {
   const [isActive, setIsActive] = useState(true);
   const [continueClicked, setContinueClicked] = useState(false);
 
+  // Removes anymore inputs when the timer has run out for the current quiz instance
   useEffect(() => {
     let interval = null;
 
@@ -247,6 +255,7 @@ const NoteRecognitionPane = (props) => {
     checkNote(midiToNote(midiNumber, false));
   };
 
+  // Displays the stave on the page with the clef, keySig and timeSig
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.innerHTML = "";
@@ -270,23 +279,29 @@ const NoteRecognitionPane = (props) => {
     }
   }, [notesDisplayed]);
 
+  // Displays the following before submit is clicked
   if (!continueClicked) {
     return (
       <Container maxWidth="md">
         <Toolbar />
+
+        {/* Section containing the buttons for submitting, showing the user's correct and wrong answers  */}
         <div style={{ display: "flex", alignItems: "center" }}>
           <h2 style={{ marginRight: "150px" }}>{scaleName}</h2>
+          {/* Shows time remaining */}
           <Fab color="secondary" variant="extended">
             {seconds}
           </Fab>
           <div style={{ marginLeft: "80px", marginRight: "80px" }}>
             <Stack direction="row" spacing={7}>
+              {/* Shows what the user got right so far */}
               <Chip
                 icon={<DoneOutlineIcon />}
                 label={result.correctAnswers}
                 variant="outlined"
                 color="success"
               />
+              {/* Shows how many wrong answers */}
               <Chip
                 icon={<DangerousIcon />}
                 label={result.wrongAnswers}
@@ -295,6 +310,7 @@ const NoteRecognitionPane = (props) => {
               />
             </Stack>
           </div>
+          {/* Button for moving to results page */}
           <Button
             variant="contained"
             disabled={isActive}
@@ -304,9 +320,11 @@ const NoteRecognitionPane = (props) => {
           </Button>
         </div>
 
+        {/* Display of the stave */}
         <div style={{ marginLeft: "100px" }}>
           <svg ref={outputRef}></svg>
         </div>
+        {/* Displaying the piano */}
         <Piano
           noteRange={{ first: firstNote, last: lastNote }}
           playNote={(midiNumber) => {
@@ -330,19 +348,19 @@ const NoteRecognitionPane = (props) => {
       </Container>
     );
   } else {
+    // Displayed when the submit button is pressed and shows the user's results
     return (
       <Container maxWidth="md">
         <Results
-        authenticated={props.authenticated}
-        userID={props.userID}
-        correct={result.correctAnswers}
-        wrong={result.wrongAnswers}
-        origin={"SightReading"}
-        keySig={midiToNote(id)}
-        time={limit}
-      />
+          authenticated={props.authenticated}
+          userID={props.userID}
+          correct={result.correctAnswers}
+          wrong={result.wrongAnswers}
+          origin={"SightReading"}
+          keySig={midiToNote(id)}
+          time={limit}
+        />
       </Container>
-      
     );
   }
 };

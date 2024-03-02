@@ -15,6 +15,7 @@ import TitleGrid from "../component/TitleGrid";
 const Learn = () => {
   return (
     <Container maxWidth="md">
+      {/* Title Banner */}
       <TitleGrid
         title={"Learn"}
         description={"Explore the music theory resources"}
@@ -25,6 +26,8 @@ const Learn = () => {
         color={"#41b638"}
       />
       <Grid container spacing={4}>
+        {/* Links to various wikipedia pages */}
+        {/* Card linking to Rhythm wiki page */}
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
@@ -45,12 +48,15 @@ const Learn = () => {
                   Rhythm
                 </Typography>
                 <Typography>
-                  Discover the foundation of music and the importance of maintaining rhythm
+                  Discover the foundation of music and the importance of
+                  maintaining rhythm
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
+
+        {/* Links to the Scale wiki page */}
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
@@ -79,6 +85,7 @@ const Learn = () => {
           </Card>
         </Grid>
 
+        {/* Links to the Pitches wikipedia page */}
         <Grid item={3} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
@@ -107,6 +114,7 @@ const Learn = () => {
           </Card>
         </Grid>
 
+        {/* Links to the Chord wikipedia page */}
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
@@ -127,13 +135,15 @@ const Learn = () => {
                   Chords
                 </Typography>
                 <Typography>
-                  Learn about the different chords and discover the patterns that make a chord what it is
+                  Learn about the different chords and discover the patterns
+                  that make a chord what it is
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
+        {/* Links to the interval wikipedia page */}
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
@@ -154,13 +164,15 @@ const Learn = () => {
                   Intervals
                 </Typography>
                 <Typography>
-                  Find out more about intervals and why we need them when playing music
+                  Find out more about intervals and why we need them when
+                  playing music
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
 
+        {/* Arpeggio wiki page */}
         <Grid item={2} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}

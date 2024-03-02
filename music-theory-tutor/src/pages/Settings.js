@@ -14,10 +14,11 @@ const Settings = ({
   fontSize,
   setFontSize,
   setWebTheme,
-  webTheme
+  webTheme,
 }) => {
   return (
     <Container maxWidth="md">
+      {/* Title Banner for Settings */}
       <TitleGrid
         title={"Settings"}
         image={
@@ -27,10 +28,20 @@ const Settings = ({
         color={"#1dd0e2"}
       />
 
+      {/* If user is logged in then the customisation settings are made available */}
       {authenticated && (
-        <Customiser setColor={setColor} loggedEmail={loggedEmail} color={color} fontSize={fontSize} setFontSize={setFontSize} setWebTheme={setWebTheme} webTheme={webTheme} />
+        <Customiser
+          setColor={setColor}
+          loggedEmail={loggedEmail}
+          color={color}
+          fontSize={fontSize}
+          setFontSize={setFontSize}
+          setWebTheme={setWebTheme}
+          webTheme={webTheme}
+        />
       )}
 
+      {/* Shows the Login link and a message if user not logged in */}
       {!authenticated && (
         <Typography variant="h4" component="h2" textAlign="center">
           <Link href="/profile" color="primary">

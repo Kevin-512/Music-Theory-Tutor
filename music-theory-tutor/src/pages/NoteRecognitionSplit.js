@@ -11,9 +11,12 @@ import React from "react";
 import TitleGrid from "../component/TitleGrid";
 import { Link } from "react-router-dom";
 
+// Page which navigates between Note Reading and Note Listening
+
 const NoteRecognitionSplit = () => {
   return (
     <Container maxWidth="md">
+      {/* Banner for title */}
       <TitleGrid
         title={"Note Recognition"}
         description={"Choose between Note Listening and Note Recall"}
@@ -24,6 +27,7 @@ const NoteRecognitionSplit = () => {
         color={"#dfc920"}
       />
       <Grid container spacing={4} style={{ justifyContent: "center" }}>
+        {/* Card that links to the note reading page */}
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
@@ -50,6 +54,7 @@ const NoteRecognitionSplit = () => {
           </Card>
         </Grid>
 
+        {/* Card linking to the note listening page */}
         <Grid item={2} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}

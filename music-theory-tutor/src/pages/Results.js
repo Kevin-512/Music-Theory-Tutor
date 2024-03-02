@@ -20,6 +20,8 @@ const Results = (props) => {
     score: props.correct,
     time: "",
   };
+
+  // Returns the user back to the quiz they were taking
   function onClick() {
     if (props.origin === "SightReading") {
       navigate("/sightreading");
@@ -36,15 +38,16 @@ const Results = (props) => {
       }
     } else if (props.origin === "NoteListening") {
       navigate("/notelistening");
-      if(props.userID !== 0){
-      data.quizType = "Notelistening";
-      handleButtonClick()
+      if (props.userID !== 0) {
+        data.quizType = "Notelistening";
+        handleButtonClick();
       }
     } else {
       navigate("/");
     }
   }
 
+  // Records the user's results in the database
   const handleButtonClick = () => {
     axios
       .post("http://localhost:8000/api/record/results", data)
@@ -62,6 +65,7 @@ const Results = (props) => {
         <h2>Results</h2>
         <div style={{ display: "flex", justifyContent: "flex-start" }}>
           <ResponsiveContainer width="20%" height={250}>
+            {/* Display a pie chart that shows correct/incorrect responses */}
             <PieChart>
               <Pie
                 dataKey="value"
@@ -84,6 +88,8 @@ const Results = (props) => {
             </PieChart>
           </ResponsiveContainer>
         </div>
+
+        {/* Using text to represent results of the user */}
         <h3>{"Correct: " + props.correct}</h3>
         <h3>{"Mistakes: " + props.wrong}</h3>
         <h3>{"Accuracy: " + (accuracy * 100).toFixed(3) + "%"}</h3>

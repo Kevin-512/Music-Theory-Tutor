@@ -15,7 +15,7 @@ import {
 import SchoolIcon from "@mui/icons-material/School";
 import QuizIcon from "@mui/icons-material/Quiz";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
-import HeadphonesIcon from '@mui/icons-material/Headphones';
+import HeadphonesIcon from "@mui/icons-material/Headphones";
 
 const drawerWidth = 240;
 
@@ -39,7 +39,7 @@ const Sidebar = () => {
           {/* Dont remove toolbar!!! Generates the padding so that the page is correctly calibrated */}
           <Toolbar />
           <Box sx={{ overflow: "auto" }}>
-            {/* Lists the Learn, Quiz and Sightreading for navigating between pages */}
+            {/* Lists the Learn, Quiz and Note Recognition for navigating between pages */}
             <List>
               <ListItem disablePadding>
                 <ListItemButton component={Link} to="/learn" value="/learn">

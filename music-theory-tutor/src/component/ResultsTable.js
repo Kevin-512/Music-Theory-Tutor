@@ -12,6 +12,7 @@ import axios from "axios";
 const ResultsTable = ({ userID }) => {
   const [results, setResults] = useState(null);
 
+  // Retrieve a user's past quiz results when they login which is denoted by the userID changing
   useEffect(() => {
     axios(`http://localhost:8000/api/results/${userID}`)
       .then((response) => {
@@ -23,6 +24,7 @@ const ResultsTable = ({ userID }) => {
   }, [userID]);
 
   return (
+    // Declares the table and all the fields in the table
     <Table size="small">
       <TableHead style={{ backgroundColor: "#975504" }}>
         <TableRow>
@@ -32,7 +34,7 @@ const ResultsTable = ({ userID }) => {
           <TableCell style={{ color: "white" }}>Time</TableCell>
         </TableRow>
       </TableHead>
-
+      {/* Loops through the data retrieved from the database and displays each individual row */}
       {results && (
         <TableBody>
           {results.map((row) => (

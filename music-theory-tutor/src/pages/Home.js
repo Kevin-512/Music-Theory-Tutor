@@ -13,9 +13,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TitleGrid from "../component/TitleGrid";
 
+// Creates a home page which is the first access point and can be reached by pressing the title icon
+
 const Home = () => {
   return (
     <Container maxWidth="md">
+      {/* Banner contianing Home title */}
       <TitleGrid
         title={"Home"}
         image={
@@ -24,6 +27,7 @@ const Home = () => {
         imageText={"main image description"}
         color={"#44e41b"}
       />
+      {/* Group of grids for navigation to main features - Quiz, Note Recognition and Learning */}
       <Grid container spacing={4}>
         <Grid item={1} xs={12} sm={6} md={4}>
           <Card
@@ -37,6 +41,7 @@ const Home = () => {
                 }}
                 image="https://images.pexels.com/photos/5939401/pexels-photo-5939401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
+              {/* Card that links to the learn page */}
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
                   Learn
@@ -62,6 +67,7 @@ const Home = () => {
                 }}
                 image="https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
+              {/* Card linking to Quizzes page */}
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
                   Quizzes
@@ -88,6 +94,7 @@ const Home = () => {
                 image="https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               />
               <CardContent sx={{ flexGrow: 1 }}>
+                {/* Card linking to Not Recognition page */}
                 <Typography gutterBottom variant="h5" component="h2">
                   Note Recognition
                 </Typography>

@@ -1,10 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import Vex from "vexflow";
 
-const StaveBuilder = ({ clef = "treble", timeSig = "4/4", notes = "", keySig=""}) => {
+// Component for displaying a stave that can be dynamically changed
+const StaveBuilder = ({
+  clef = "treble",
+  timeSig = "4/4",
+  notes = "",
+  keySig = "",
+}) => {
   const { Factory } = Vex.Flow;
   const outputRef = useRef(null);
 
+  // Declares the functionality of the piano, clef, timeSig and keySig
   useEffect(() => {
     if (outputRef.current) {
       outputRef.current.innerHTML = "";
@@ -18,9 +25,7 @@ const StaveBuilder = ({ clef = "treble", timeSig = "4/4", notes = "", keySig=""}
 
       system
         .addStave({
-          voices: [
-            score.voice(score.notes(notes)).setStrict(false),
-          ],
+          voices: [score.voice(score.notes(notes)).setStrict(false)],
         })
         .addClef(clef)
         .addTimeSignature(timeSig)

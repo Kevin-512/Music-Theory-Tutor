@@ -10,6 +10,8 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import { useNavigate } from "react-router-dom";
 import Soundfont from "soundfont-player";
 
+// Create a navigation to select the note for note listening
+
 const NoteListening = () => {
   const [alignment, setAlignment] = React.useState("major");
   const navigate = useNavigate();
@@ -73,6 +75,7 @@ const NoteListening = () => {
         color={"#dfc920"}
       />
 
+      {/* Displays piano with notes labelled telling the user which note will be quizzed on */}
       <Piano
         noteRange={{ first: firstNote, last: lastNote }}
         playNote={(midiNumber, volume = 1.0) => {
@@ -98,6 +101,8 @@ const NoteListening = () => {
         keyboardShortcuts={keyboardShortcuts}
       />
       <Toolbar />
+
+      {/* Button for choosing between Major or Minor quiz */}
       <ToggleButtonGroup
         style={{ marginRight: "30px" }}
         value={alignment}

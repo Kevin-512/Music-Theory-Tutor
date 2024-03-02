@@ -55,6 +55,7 @@ const NoteListeningCard = (props) => {
     ],
   });
 
+  // Using a  midiNumber, convert it into a note by mapping it with a dictionary and adding an octave depending on parameters
   function midiToNote(midiNumber, addOctave) {
     const notes = [
       "C",
@@ -79,6 +80,7 @@ const NoteListeningCard = (props) => {
     }
   }
 
+  // Returns the keySignature of a note
   function getKeySignature(input) {
     const parts = input.toLowerCase().split(" ");
     const note = parts[0];
@@ -153,6 +155,7 @@ const NoteListeningCard = (props) => {
   const [result, setResult] = useState(Boolean);
   const [submitClicked, setSubmitClicked] = useState(false);
 
+  // Plays the randomly generated notes
   function playSequence() {
     console.log(notesDisplayed);
     var ac = new AudioContext();
@@ -171,6 +174,7 @@ const NoteListeningCard = (props) => {
     });
   }
 
+  // Plays the piano if there are notes generated, otherwise does nothing
   function handlePianoPlay(midiNumber) {
     if (noteSequence.split(",").length >= notesDisplayed.split(",").length) {
       return;
@@ -184,6 +188,7 @@ const NoteListeningCard = (props) => {
     console.log(noteSequence);
   }
 
+  // Compares the user's input with the randomly generated notes
   function checkResult() {
     if (noteSequence === notesDisplayed) {
       setResult(true);
@@ -193,10 +198,12 @@ const NoteListeningCard = (props) => {
     setSubmitClicked(true);
   }
 
+  // Clears the stave of notes
   function clearResult() {
     setNoteSequence("");
   }
 
+  // Removes the most recently added note in the stave
   function clearOne() {
     if (noteSequence !== "") {
       let lastComma = noteSequence.lastIndexOf(",");
@@ -230,6 +237,7 @@ const NoteListeningCard = (props) => {
     }
   }, [noteSequence]);
 
+  // Displays the entire application if the answer to current question hasn't been submitted
   if (!submitClicked) {
     return (
       <Container maxWidth="md">
@@ -239,6 +247,7 @@ const NoteListeningCard = (props) => {
             {scaleName}
           </h2>
           <Grid container spacing={2}>
+            {/* Button to play the notes that were generated */}
             <Grid item>
               <Button
                 variant="contained"
@@ -249,6 +258,7 @@ const NoteListeningCard = (props) => {
               </Button>
             </Grid>
 
+            {/* Clear button to remove all notes from stave */}
             <Grid item>
               <Button
                 variant="contained"
@@ -259,6 +269,7 @@ const NoteListeningCard = (props) => {
               </Button>
             </Grid>
 
+            {/* Remove a single note from the stave */}
             <Grid item>
               <Button
                 variant="contained"
@@ -269,6 +280,7 @@ const NoteListeningCard = (props) => {
               </Button>
             </Grid>
 
+            {/* Submit button to check answers */}
             <Grid item>
               <Button
                 variant="contained"
@@ -309,6 +321,7 @@ const NoteListeningCard = (props) => {
       </Container>
     );
   } else {
+    // Displays the results of the user's input and how many they got right
     return (
       <Results
         authenticated={props.authenticated}

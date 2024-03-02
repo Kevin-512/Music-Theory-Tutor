@@ -16,8 +16,9 @@ const Profile = ({
   setColor,
   setFontSize,
   userID,
-  setWebTheme
+  setWebTheme,
 }) => {
+  // Retrieves the email from the database when the user logs in
   useEffect(() => {
     console.log(
       "useEffect triggered. Authenticated:",
@@ -30,6 +31,7 @@ const Profile = ({
     }
   }, [authenticated, loggedEmail]);
 
+  // Retrieves the color and font settings of the user that logged in
   const fetchSettings = (email) => {
     axios
       .get(`http://localhost:8000/api/settings/${email}`)
@@ -45,6 +47,7 @@ const Profile = ({
       });
   };
 
+  // Clears all variables when the user presses the logout
   const logout = () => {
     setUserID(0);
     setAuthenticated(false);
@@ -53,7 +56,7 @@ const Profile = ({
     setColor("#883bc4");
     setFontSize(14);
     setWebTheme("light");
-  }
+  };
 
   return (
     <Container maxWidth="md">
@@ -65,6 +68,8 @@ const Profile = ({
         imageText={"main image description"}
         color={"#dfc920"}
       />
+
+      {/* Diplays the login form if the user hasn't logged in */}
       {!authenticated && (
         <LoginCard
           setAuthenticated={setAuthenticated}
@@ -74,15 +79,27 @@ const Profile = ({
         />
       )}
 
+      {/* If the user is logged in, display the following */}
       {authenticated && (
-        <Container style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <Container
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* Logout button and welcome message */}
           <Typography variant="h3" textAlign="center">
             {"Welcome back " + userName}
           </Typography>
-          <Button variant="contained" justifyContent="center" onClick={logout}>Logout</Button>
+          <Button variant="contained" justifyContent="center" onClick={logout}>
+            Logout
+          </Button>
         </Container>
       )}
       <Toolbar />
+      {/* Shows the user's email to know what account they are logged in with */}
       {authenticated && (
         <Container>
           <Typography variant="h4" textAlign="center">
@@ -91,6 +108,7 @@ const Profile = ({
         </Container>
       )}
       <Toolbar />
+      {/* Displays the user's history table once they login */}
       {authenticated && (
         <Container>
           <Typography variant="h4" textAlign="center">

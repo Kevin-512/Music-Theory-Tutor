@@ -23,16 +23,18 @@ const Customiser = ({
   fontSize,
   setFontSize,
   setWebTheme,
-  webTheme
+  webTheme,
 }) => {
   const [value, setValue] = useState(color);
   const [themeDark, setThemeDark] = useState(false);
 
+  // Changes the colour theme of the application
   const handleChange = (newValue) => {
     setValue(newValue);
     setColor(newValue);
   };
 
+  // Stores the colour value into the database based on the logged in email
   const updateColor = () => {
     axios
       .patch(`http://localhost:8000/api/update/theme/${loggedEmail}`, {
@@ -46,6 +48,7 @@ const Customiser = ({
       });
   };
 
+  // Restores default colour scheme and updates the database
   const defaultColor = () => {
     setValue("#883bc4");
     setColor("#883bc4");
@@ -61,6 +64,7 @@ const Customiser = ({
       });
   };
 
+  // Update font size for corresponding email in database
   const updateFont = () => {
     axios
       .patch(`http://localhost:8000/api/update/font/${loggedEmail}`, {
@@ -74,6 +78,7 @@ const Customiser = ({
       });
   };
 
+  // Restores font back to default in database for corresponding email
   const defaultFont = () => {
     setFontSize(14);
     axios
@@ -88,17 +93,19 @@ const Customiser = ({
       });
   };
 
+  // Changes theme of application between light and dark
   const updateTheme = (event) => {
     setThemeDark(event.target.checked);
-    if (themeDark === false){
-      setWebTheme("dark")
-    }else{
-      setWebTheme("light")
+    if (themeDark === false) {
+      setWebTheme("dark");
+    } else {
+      setWebTheme("light");
     }
   };
 
+  // Stores the theme into database with email as input
   const saveTheme = () => {
-    console.log(webTheme)
+    console.log(webTheme);
     axios
       .patch(`http://localhost:8000/api/update/mode/${loggedEmail}`, {
         mode: webTheme,
@@ -112,6 +119,7 @@ const Customiser = ({
       });
   };
 
+  // Restores theme to light mode for logged in user
   const defaultTheme = () => {
     setThemeDark(false);
     setWebTheme("light");
@@ -129,6 +137,7 @@ const Customiser = ({
 
   return (
     <Container maxWidth="md">
+      {/* Create row for colour picker with save and default */}
       <Container
         style={{
           display: "flex",
@@ -152,6 +161,8 @@ const Customiser = ({
           </Grid>
         </Grid>
       </Container>
+
+      {/* Row for creating dropdown to choose the font size of the application */}
       <Toolbar />
       <Container
         style={{
@@ -193,6 +204,8 @@ const Customiser = ({
           </Grid>
         </Grid>
       </Container>
+
+      {/* Row for changing between light and dark mode */}
       <Toolbar />
       <Container
         style={{

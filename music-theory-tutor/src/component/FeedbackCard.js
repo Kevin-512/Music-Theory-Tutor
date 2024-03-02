@@ -5,16 +5,18 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 
+// Create a feedback card which displays the results to a quiz and the correct answer
+
 const FeedbackCard = (props) => {
-let cardColour = ""
-let outcome = ""
-if (props.result === true){
-    cardColour = "#43bc63"
-    outcome = "Correct!"
-}else if (props.result === false){
-    cardColour= "#d72928"
-    outcome = "Incorrect"
-}
+  let cardColour = "";
+  let outcome = "";
+  if (props.result === true) {
+    cardColour = "#43bc63";
+    outcome = "Correct!";
+  } else if (props.result === false) {
+    cardColour = "#d72928";
+    outcome = "Incorrect";
+  }
 
   const card = (
     <div>
@@ -32,14 +34,18 @@ if (props.result === true){
     </div>
   );
 
-  if(props.display){
+  if (props.display) {
     return (
-    <Box sx={{ minWidth: 275, maxWidth: 500 }}>
-      <Card variant="outlined" style={{backgroundColor: cardColour, color: "white"}}>{card}</Card>
-    </Box>
-  );
-};
+      <Box sx={{ minWidth: 275, maxWidth: 500 }}>
+        <Card
+          variant="outlined"
+          style={{ backgroundColor: cardColour, color: "white" }}
+        >
+          {card}
+        </Card>
+      </Box>
+    );
   }
-  
+};
 
 export default FeedbackCard;
