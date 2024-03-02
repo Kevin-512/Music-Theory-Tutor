@@ -42,7 +42,7 @@ const NoteRecognitionSplit = () => {
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Note Recall
+                  Note Reading
                 </Typography>
                 <Typography>
                   Find yourself in a time restrictive situation where you'll

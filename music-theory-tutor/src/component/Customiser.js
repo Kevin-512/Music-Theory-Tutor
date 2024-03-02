@@ -12,7 +12,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MuiColorInput } from "mui-color-input";
 import axios from "axios";
 
@@ -27,6 +27,13 @@ const Customiser = ({
 }) => {
   const [value, setValue] = useState(color);
   const [themeDark, setThemeDark] = useState(false);
+
+  // Sets the switch for dark mode to true when the user logs in
+  useEffect(() => {
+    if (webTheme === "dark"){
+      setThemeDark(true);
+    }
+  }, [webTheme]);
 
   // Changes the colour theme of the application
   const handleChange = (newValue) => {

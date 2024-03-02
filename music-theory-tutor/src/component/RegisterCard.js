@@ -10,9 +10,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
+import { IconButton, InputAdornment } from "@mui/material";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 
 const RegisterCard = () => {
   const [displayMessage, setDisplayMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   async function registerUser(details) {
     return fetch("http://localhost:8000/api/register/", {
       method: "POST",
@@ -22,6 +27,11 @@ const RegisterCard = () => {
       body: JSON.stringify(details),
     }).then((data) => data.json());
   }
+
+  // Handle show and hide password
+  const showPasswordClicked = () => {
+    setShowPassword(!showPassword);
+  };
 
   // Function for submitting data to the database
   const handleSubmit = async (e) => {
@@ -90,9 +100,26 @@ const RegisterCard = () => {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="new-password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={showPasswordClicked}
+                        edge="end"
+                      >
+                        {showPassword ? (
+                          <VisibilityOffRoundedIcon />
+                        ) : (
+                          <VisibilityRoundedIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12}>

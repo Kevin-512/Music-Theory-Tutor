@@ -14,6 +14,9 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { IconButton, InputAdornment } from "@mui/material";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 
 const LoginCard = ({
   setAuthenticated,
@@ -24,6 +27,7 @@ const LoginCard = ({
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [displayMessage, setDisplayMessage] = useState();
+  const [showPassword, setShowPassword] = useState(false);
 
   // Function for fetching a user's login details when they've been entered
   async function loginUser(credentials) {
@@ -53,6 +57,12 @@ const LoginCard = ({
       setDisplayMessage("Incorrect or Missing Details");
     }
   };
+
+  // Handle show and hide password
+  const showPasswordClicked = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       {/* Creates a form for the user to fill out email and password to login */}
@@ -83,17 +93,36 @@ const LoginCard = ({
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <TextField
             margin="normal"
             required
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={showPasswordClicked}
+                    edge="end"
+                  >
+                    {showPassword ? (
+                      <VisibilityOffRoundedIcon />
+                    ) : (
+                      <VisibilityRoundedIcon />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
+
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"

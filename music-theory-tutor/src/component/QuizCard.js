@@ -204,14 +204,13 @@ const QuizCard = (props) => {
               </Grid>
             </Grid>
           </Container>
-          <Container style={{ paddingTop: "20px" }}>
-            <div style={{ paddingLeft: "300px" }}>
+          <Container style={{ paddingTop: "20px" , justifyContent: "center", display: "flex"}}>
               <FeedbackCard
                 display={questionSubmitted}
                 result={selectedAnswer}
                 feedback={questions[activeQuestion].correctAnswer}
               />
-            </div>
+
           </Container>
         </Container>
       </Container>

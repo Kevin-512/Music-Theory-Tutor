@@ -40,6 +40,7 @@ const Profile = ({
         if (data.message === "success") {
           setColor(data.data[0].color);
           setFontSize(data.data[0].textsize);
+          setWebTheme(data.data[0].mode);
         }
       })
       .catch((error) => {

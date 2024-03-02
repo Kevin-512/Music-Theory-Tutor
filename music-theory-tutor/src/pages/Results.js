@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material";
+import { Button, Container, Toolbar, Typography } from "@mui/material";
 import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -64,7 +64,7 @@ const Results = (props) => {
       <Container>
         <h2>Results</h2>
         <div style={{ display: "flex", justifyContent: "flex-start" }}>
-          <ResponsiveContainer width="20%" height={250}>
+          <ResponsiveContainer width="50%" height={250}>
             {/* Display a pie chart that shows correct/incorrect responses */}
             <PieChart>
               <Pie
@@ -90,11 +90,63 @@ const Results = (props) => {
         </div>
 
         {/* Using text to represent results of the user */}
-        <h3>{"Correct: " + props.correct}</h3>
-        <h3>{"Mistakes: " + props.wrong}</h3>
-        <h3>{"Accuracy: " + (accuracy * 100).toFixed(3) + "%"}</h3>
-        <h3>{"Total Answered: " + total}</h3>
-        <h3>{props.userID}</h3>
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#5cd972",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Correct"}</span>
+          <span>{props.correct}</span>
+        </Typography>
+
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#e5554b",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Mistakes"}</span>
+          <span>{props.wrong}</span>
+        </Typography>
+
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#d0f32f",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Accuracy"}</span>
+          <span>{(accuracy * 100).toFixed(3) + "%"}</span>
+        </Typography>
+
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#edb74e",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Total Answered"}</span>
+          <span>{total}</span>
+        </Typography>
+
+        <Toolbar />
         <Button onClick={onClick} variant="contained">
           Return
         </Button>
@@ -121,11 +173,52 @@ const Results = (props) => {
 
     return (
       <Container maxWidth="md">
-        <h1>{props.correctNoOctave}</h1>
-        <h1>{answerNoOctave}</h1>
-        <h1>
-          {"Accuracy: " + (answeredCorrectly / correctArray.length) * 100 + "%"}
-        </h1>
+        <Toolbar />
+        <Toolbar />
+        
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#5cd972",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Correct Answer"}</span>
+          <span>{props.correctNoOctave.replace(/,/g, ' ')}</span>
+        </Typography>
+
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#f1c97a",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Your Answer"}</span>
+          <span>{answerNoOctave.join(" ")}</span>
+        </Typography>
+
+        <Typography
+          variant="h5"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#d1ec66",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          <span>{"Accuracy"}</span>
+          <span>{(answeredCorrectly / correctArray.length) * 100 + "%"}</span>
+        </Typography>
+
+        <Toolbar />
         <Button onClick={onClick} variant="contained">
           Return
         </Button>
