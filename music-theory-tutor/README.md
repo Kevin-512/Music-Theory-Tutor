@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Running the application
+Start the webpage, hosted on [http://localhost:3000](http://localhost:3000)
+### `npm start`
+
+Run the server, hosted on [http://localhost:8000](http://localhost:8000)
+### `npm run server`
+
 ## Available Scripts
 
 In the project directory, you can run:
