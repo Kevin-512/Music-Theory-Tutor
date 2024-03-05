@@ -1,7 +1,7 @@
-import { Button, ButtonGroup, Container, Grid, Toolbar } from "@mui/material";
+import { Button, Container, Grid, Toolbar } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Scale, note } from "tonal";
+import { Scale } from "tonal";
 import Soundfont from "soundfont-player";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import { Vex } from "vexflow";

@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
-import App from "../../App";
+import { render, screen } from "@testing-library/react";
+import App from "../App";
 
 test("App initialises variables correctly", () => {
   render(<App/>);
 
-  expect("Authenticated: No").toBeInTheDocument();
-  expect("Authenticated: No").toBeInTheDocument();
+  expect(screen.getByText('authenticated: false')).toBeInTheDocument();
+  expect("userID: 0").toBeInTheDocument();
 });

@@ -274,10 +274,9 @@ const NoteRecognitionPane = (props) => {
         .addClef("treble")
         .addTimeSignature("4/4")
         .addKeySignature(getKeySignature(scaleName));
-
       vf.draw();
     }
-  }, [notesDisplayed]);
+  }, [notesDisplayed, Factory, scaleName]);
 
   // Displays the following before submit is clicked
   if (!continueClicked) {

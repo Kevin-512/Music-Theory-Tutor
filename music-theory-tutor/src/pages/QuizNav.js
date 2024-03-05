@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import { useNavigate } from "react-router-dom";

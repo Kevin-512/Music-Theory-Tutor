@@ -4,7 +4,6 @@ import {
   Container,
   ToggleButton,
   ToggleButtonGroup,
-  Toolbar,
   Grid,
   Stack,
   Chip,
@@ -12,7 +11,6 @@ import {
 import React, { useState } from "react";
 import * as allQuizzes from "../constant/quizData";
 import StaveBuilder from "../display/StaveBuilder";
-import { useNavigate } from "react-router-dom";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import FeedbackCard from "./FeedbackCard";

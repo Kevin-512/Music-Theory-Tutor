@@ -1,12 +1,21 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Home from "../../pages/Home";
+import { MemoryRouter } from "react-router-dom";
 
-// test("Home renders successfully", () => {
+test("Home renders successfully", () => {
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>
+  );
 
-//   render(<Home/>)
-
-//   // const element = screen.getByText(/Home/i);
-
-//   // expect(element).toBeInTheDocument();
-// });
+  const title = screen.getByText("Home");
+  expect(title).toBeInTheDocument();
+  const learn = screen.getByText("Learn");
+  expect(learn).toBeInTheDocument();
+  const quiz = screen.getByText("Quizzes");
+  expect(quiz).toBeInTheDocument();
+  const sightread = screen.getByText("Note Recognition");
+  expect(sightread).toBeInTheDocument();
+});

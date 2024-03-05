@@ -29,7 +29,7 @@ const Home = () => {
       />
       {/* Group of grids for navigation to main features - Quiz, Note Recognition and Learning */}
       <Grid container spacing={4}>
-        <Grid item={1} xs={12} sm={6} md={4}>
+        <Grid item={true} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
@@ -55,7 +55,7 @@ const Home = () => {
           </Card>
         </Grid>
 
-        <Grid item={2} xs={12} sm={6} md={4}>
+        <Grid item={true} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
@@ -81,7 +81,7 @@ const Home = () => {
           </Card>
         </Grid>
 
-        <Grid item={3} xs={12} sm={6} md={4}>
+        <Grid item={true} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
