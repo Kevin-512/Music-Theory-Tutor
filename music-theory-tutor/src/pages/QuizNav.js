@@ -69,7 +69,7 @@ const QuizNav = () => {
       {/* Display Banner */}
       <TitleGrid
         title={"Quizzes"}
-        description={"Choose a note to begin the exercise"}
+        description={"Choose a note to begin a quiz with the note selected"}
         image={
           "https://images.pexels.com/photos/5428829/pexels-photo-5428829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         }
