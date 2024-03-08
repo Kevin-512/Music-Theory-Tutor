@@ -26,7 +26,7 @@ const Results = (props) => {
     if (props.origin === "SightReading") {
       navigate("/sightreading");
       if (props.userID !== 0) {
-        data.quizType = "Sightreading";
+        data.quizType = "Note Reading";
         data.time = props.time;
         handleButtonClick();
       }
@@ -39,7 +39,7 @@ const Results = (props) => {
     } else if (props.origin === "NoteListening") {
       navigate("/notelistening");
       if (props.userID !== 0) {
-        data.quizType = "Notelistening";
+        data.quizType = "Note Listening";
         handleButtonClick();
       }
     } else {
