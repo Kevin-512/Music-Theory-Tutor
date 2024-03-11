@@ -31,9 +31,9 @@ function App() {
         main: color,
       },
       mode: webTheme,
-      background: {
-        default: "#fff9f0"
-      }
+      // background: {
+      //   default: "#fff9f0"
+      // }
     },
     
     typography: {

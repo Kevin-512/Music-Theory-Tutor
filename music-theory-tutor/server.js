@@ -83,8 +83,8 @@ app.post("/api/register", (req, res, next) => {
       return;
     }
     var settingsSql =
-      "INSERT INTO settings (email, color, textsize) VALUES (?,?,?)";
-    var settingsParams = [data.email, "#883bc4", 14];
+      "INSERT INTO settings (email, color, textsize, mode) VALUES (?,?,?,?)";
+    var settingsParams = [data.email, "#883bc4", 14, "light"];
     db.run(settingsSql, settingsParams, function (err, result) {
       if (err) {
         res.status(400).json({ error: err.message });
